@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="dEKIskZSG1sj_B105kZnKupOw7mKVCXsSrXXim-FhqI">
+  <meta name="msvalidate.01" content="9896C95C563A05172CD78265E4243404">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"frost-lee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="This tutorial illustrates steps for setting up a Shadowsocks server on Ubuntu system. Time to embrace a bigger world!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting Up Shadowsocks Service on an Ubuntu Server">
+<meta property="og:url" content="https://frost-lee.github.io/shadowsocks-ubuntu/index.html">
+<meta property="og:site_name" content="Frost&#39;s Blog">
+<meta property="og:description" content="This tutorial illustrates steps for setting up a Shadowsocks server on Ubuntu system. Time to embrace a bigger world!">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-01-25T04:45:19.000Z">
+<meta property="article:modified_time" content="2021-01-29T11:19:59.971Z">
+<meta property="article:author" content="Frost Lee">
+<meta property="article:tag" content="Shadowsocks">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://frost-lee.github.io/shadowsocks-ubuntu/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Setting Up Shadowsocks Service on an Ubuntu Server | Frost's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139409052-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-139409052-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Frost's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Frost's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frost's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://frost-lee.github.io/shadowsocks-ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.png">
+      <meta itemprop="name" content="Frost Lee">
+      <meta itemprop="description" content="Civilize the age.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frost's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Setting Up Shadowsocks Service on an Ubuntu Server
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-25 12:45:19" itemprop="dateCreated datePublished" datetime="2020-01-25T12:45:19+08:00">2020-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-29 19:19:59" itemprop="dateModified" datetime="2021-01-29T19:19:59+08:00">2021-01-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Developer-General/" itemprop="url" rel="index"><span itemprop="name">Developer General</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This tutorial illustrates steps for setting up a Shadowsocks server on Ubuntu system. Time to embrace a bigger world!<a id="more"></a> Shadowsocks is a secure socks5 proxy and was designed to protect your internet traffic. Well, what does "protect" mean here? If you are among its target users, you would know.</p>
+<h1 id="installing-shadowsocks-and-get-it-running">Installing Shadowsocks and Get it Running</h1>
+<p>There are multiple versions of Shadowsocks available, including the original <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shadowsocks/shadowsocks">Python based Shadowsocks</a>, the <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shadowsocks/shadowsocks-libev">Shadowsocks-libev</a>, and <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shadowsocksr-backup/shadowsocksr">ShadowsocksR</a>. For the purpose of installing plugins for obfuscation (in the following section), the Shadowsocks-libev is chosen here. By following its README file, Shadowsocks-libev could be installed with the following two commands.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install shadowsocks-libev</span><br></pre></td></tr></table></figure>
+<p>By entering <code>ss-server -h</code> in the console, all the parameters of the command <code>ss-server</code> are given. You could definitely start a shadowsocks server via a single command by attaching all parameters to it, but it is also good to create a configuration file which helps you no longer need to enter the long parameter list manually. A configuration file looks like this.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;server_port&quot;</span>:<span class="number">443</span>,</span><br><span class="line">	<span class="attr">&quot;local_port&quot;</span>:<span class="number">443</span>,</span><br><span class="line">	<span class="attr">&quot;password&quot;</span>:<span class="string">&quot;yourpassword&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;timeout&quot;</span>:<span class="number">600</span>,</span><br><span class="line">	<span class="attr">&quot;method&quot;</span>:<span class="string">&quot;aes-256-gcm&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Once you've finished editing the config file (suppose the file name is <code>config.json</code>), you can start the shadowsocks server by executing the following command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss-server -c /path/to/config.json</span><br></pre></td></tr></table></figure>
+<p>Or, if you want the shadowsocks server run as a background process (as most people do), execute the following command instead.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ss-server -c /path/to/config.json &gt;&gt; /path/to/log.txt &amp;</span><br></pre></td></tr></table></figure>
+<p>If you would like to shut down the server, use <code>ps -ef | grep ss-server</code> to get the pid of your shadowsocks server, and then kill the process using <code>kill</code>.</p>
+<p>Before this section is finished, I would like to talk more about some details about the configuration.</p>
+<h2 id="port-choosing">Port Choosing</h2>
+<p>By deploying the Shadowsocks server in 443 port, your Shadowsocks data stream looks more like a data stream for web browsing via HTTPS. It's also worth mentioning that some Wi-Fi networks have firewalls that stop connections to other ports except for normal ports such as 443, 80, 22, etc. But of course, you can select your favorite port from 0 to 65535, as long as they are not occupied by other services.</p>
+<h2 id="encryption-method-choosing">Encryption Method Choosing</h2>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://printempw.github.io/why-do-shadowsocks-deprecate-ota/">This article</a> discusses the details of why AEAD based encryption algorithms are safer than stream encryption + OTA algorithms. The available AEAD algorithms that Shadowsocks-libev currently supports includes the following.</p>
+<ul>
+<li>aes-128-gcm</li>
+<li>aes-192-gcm</li>
+<li>aes-256-gcm</li>
+<li>chacha20-ietf-poly1305</li>
+<li>xchacha20-ietf-poly1305</li>
+</ul>
+<p>Besides, <a target="_blank" rel="noopener external nofollow noreferrer" href="https://gist.github.com/Blankwonder/9079bd001e56919f87bfdeafeb77e5ce">this gist</a> suggests AES based algorithm performs badly on ARM processors. Thus, it has been suggested that AES based algorithms shall be used for desktop clients, while chacha based algorithms shall be used for mobile clients.</p>
+<h1 id="using-obfuscation">Using Obfuscation</h1>
+<p>Obfuscation is another method that reduces the feature of your data stream, thus making it harder for GFW to determine whether your data stream is sent to a shadowsocks server. It pretends your data stream as you are accessing a normal website now. However, <strong>using obfuscation will reduce the speed of your shadowsocks</strong>. If you care about the speed a lot while feeling it's okay to change your server's IP some times when they are unluckily blocked, you don't need obfuscation.</p>
+<p>In this section, the obfuscation configuration using <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/shadowsocks/v2ray-plugin">v2ray-plugin</a> will be introduced. First, you need to make sure you have go-lang on your server. If not, you can install it by following <a target="_blank" rel="noopener external nofollow noreferrer" href="https://golang.org/doc/install?download=go1.13.6.linux-amd64.tar.gz">this</a> instruction.</p>
+<p>The following commands will help you to get v2ray ready on your server.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:shadowsocks/v2ray-plugin.git</span><br><span class="line"><span class="built_in">cd</span> v2ray-plugin</span><br><span class="line">go build</span><br><span class="line">cp v2ray-plugin /usr/bin/v2ray-plugin</span><br><span class="line"><span class="built_in">setcap</span> cap_net_bind_service+ep /usr/bin/v2ray-plugin</span><br></pre></td></tr></table></figure>
+<p>Now use the following command to start v2ray serving in a background process.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v2ray-plugin &amp;</span><br></pre></td></tr></table></figure>
+<p>Then attach the following lines to your configuration file so that Shadowsocks-libev uses v2ray-plugin to obfuscate its data stream.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;server_port&quot;</span>:<span class="number">443</span>,</span><br><span class="line">	<span class="attr">&quot;local_port&quot;</span>:<span class="number">443</span>,</span><br><span class="line">	<span class="attr">&quot;password&quot;</span>:<span class="string">&quot;yourpassword&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;timeout&quot;</span>:<span class="number">600</span>,</span><br><span class="line">	<span class="attr">&quot;method&quot;</span>:<span class="string">&quot;aes-256-gcm&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;plugin&quot;</span>:<span class="string">&quot;v2ray-plugin&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;plugin_opts&quot;</span>:<span class="string">&quot;server&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Finally, the shadowsocks server can be started as the previous section mentioned. Note that you would need extra configuration on your client shadowsocks application so that obfuscation works. By assigning an URL to <code>obfs-host</code> parameter on the client, your data stream will look like data accessing the URL you defined.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Shadowsocks/" rel="tag"># Shadowsocks</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/memo-time-series/" rel="prev" title="A Memo for Time Series Analysis">
+      <i class="fa fa-chevron-left"></i> A Memo for Time Series Analysis
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/longest-day/" rel="next" title="最长的一天">
+      最长的一天 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#installing-shadowsocks-and-get-it-running"><span class="nav-number">1.</span> <span class="nav-text">Installing Shadowsocks and Get it Running</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#port-choosing"><span class="nav-number">1.1.</span> <span class="nav-text">Port Choosing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#encryption-method-choosing"><span class="nav-number">1.2.</span> <span class="nav-text">Encryption Method Choosing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#using-obfuscation"><span class="nav-number">2.</span> <span class="nav-text">Using Obfuscation</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Frost Lee"
+      src="/images/Avatar.png">
+  <p class="site-author-name" itemprop="name">Frost Lee</p>
+  <div class="site-description" itemprop="description">Civilize the age.</div>
+</div>
+
+
+   <div class="feed-link motion-element">
+     <a href="/atom.xml" rel="alternate">
+       <i class="fa fa-rss"></i>
+       RSS
+     </a>
+   </div>
+ 
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Frost-Lee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Frost-Lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10068755/frost-lee" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10068755&#x2F;frost-lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact.FrostLee@gmail.com" title="E-Mail → mailto:contact.FrostLee@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frost Lee</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '13c40b3687a06d2c9a84',
+      clientSecret: '3ce983fcf815d6ee689b8e00d1bec23a7973c396',
+      repo        : 'Frost-Lee.github.io',
+      owner       : 'Frost-Lee',
+      admin       : ['Frost-Lee'],
+      id          : '/shadowsocks-ubuntu/',
+        language: 'en',
+      distractionFreeMode: true,
+      proxy: 'http://209.250.236.3:8080/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

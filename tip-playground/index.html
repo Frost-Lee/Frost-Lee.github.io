@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="dEKIskZSG1sj_B105kZnKupOw7mKVCXsSrXXim-FhqI">
+  <meta name="msvalidate.01" content="9896C95C563A05172CD78265E4243404">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"frost-lee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="If you have experience in iOS development with Swift, making a Swift Playground application would not be a tough job for you. However, there are still some differences between developing an iOS applic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tips for Developing a Swift Playground">
+<meta property="og:url" content="https://frost-lee.github.io/tip-playground/index.html">
+<meta property="og:site_name" content="Frost&#39;s Blog">
+<meta property="og:description" content="If you have experience in iOS development with Swift, making a Swift Playground application would not be a tough job for you. However, there are still some differences between developing an iOS applic">
+<meta property="og:locale">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg">
+<meta property="article:published_time" content="2019-03-30T14:28:21.000Z">
+<meta property="article:modified_time" content="2021-01-31T15:03:07.364Z">
+<meta property="article:author" content="Frost Lee">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="Swift Playground">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg">
+
+<link rel="canonical" href="https://frost-lee.github.io/tip-playground/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Tips for Developing a Swift Playground | Frost's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139409052-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-139409052-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Frost's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Frost's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frost's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://frost-lee.github.io/tip-playground/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.png">
+      <meta itemprop="name" content="Frost Lee">
+      <meta itemprop="description" content="Civilize the age.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frost's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tips for Developing a Swift Playground
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-30 22:28:21" itemprop="dateCreated datePublished" datetime="2019-03-30T22:28:21+08:00">2019-03-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-31 23:03:07" itemprop="dateModified" datetime="2021-01-31T23:03:07+08:00">2021-01-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software-Developing/" itemprop="url" rel="index"><span itemprop="name">Software Developing</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>If you have experience in iOS development with Swift, making a Swift Playground application would not be a tough job for you. However, there are still some differences between developing an iOS application and a Swift Playground application<a id="more"></a>, for example, using Storyboard and Xib files is almost impossible, and the code execution queue might be a little bit different. Here are some tips that can help iOS developers to quickly hands-on Swift Playground application development. Briefly speaking, here are the things that you should know about developing a Swift Playground:</p>
+<ul>
+<li>Create files in <code>./Sources/</code> folder to write your primary code (classes definition, instance method, struct definition, etc.), instead of writing everything directly in <code>Contents.swift</code>.</li>
+<li>Use proper layout with <code>NSLayoutConstraint</code>, as it is too difficult to introduce the interface builder to your Swift Playground application.</li>
+<li>Use Mark Up grammar with special indicators to write a good looking and interactive playground instruction.</li>
+<li>Write, AirDrop, test run, and again.</li>
+</ul>
+<p>Note that the sample code in this article can be found in <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Frost-Lee/Now-You-Hear-Me">this repository</a>.</p>
+<p><img src="http://209.250.236.3:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg" alt="Now You Hear Me" /></p>
+<h1 id="adding-source-file-to-your-project">Adding Source File to Your Project</h1>
+<p>Even though the single view playground template defines a <code>UIViewController</code> class in the file <code>Contents.swift</code>, the <code>./Sources/</code> folder is capable of placing the source code files, and it is strongly recommended to create the classes in separate files instead of writing everything in <code>Contents.swift</code>.</p>
+<p>I personally noticed that there would be unreasonable dispatch queue issues with the code execution. In brief, the code execution queue in <code>Contents.swift</code> may not be identical to the queue that is supposed to be executed, this could cause run time error, and of course, iPad would not indicate anything about the error: it would just suggest that there is something going wrong, and you need to check your code. Sometimes the error would be eliminated with <code>DispatchQueue.main.async</code> method, others are more complicated, and the performance varies from the version of iPad, and from each run to other runs. For instance, the Playground workes fine on iPad 2018 would fail on iPad Pro, and the code that works well this time might fail the next time you run it. Thus, to make your life easier, simply place most of the code on the files in <code>./Sources/</code>, instead of writing everything in a single file.</p>
+<p>By the way, do not forget to use <code>public</code> notation in front of the shared variable definition and override function definition since the code in <code>./Sources/</code> is actually a package. Here is some sample code.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">delay</span><span class="params">(<span class="keyword">for</span> seconds: Double, block: @escaping <span class="params">()</span></span></span>-&gt;()) &#123;</span><br><span class="line">    <span class="type">DispatchQueue</span>.main.asyncAfter(deadline: <span class="type">DispatchTime</span>.now() + seconds, execute: block)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SequenceViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> backgroundView: <span class="type">UIView</span> = <span class="type">UIView</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">loadView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.loadView()</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@objc</span> <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">startButtonTapped</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">playNote</span><span class="params">(at index: Int, <span class="built_in">min</span>: Int, <span class="built_in">max</span>: Int)</span></span> &#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="layout-your-interface">Layout Your Interface</h1>
+<p>For Swift Playground projects, applying storyboard files or xib files is extremely complicated and could cause lots of problems. Besides, considering the functionality of the Swift Playground, the interface is usually simple. Thus, applying layout with code is a good option. <code>NSLayoutConstraint</code> is used for this purpose.</p>
+<h2 id="where-to-add-the-code">Where to Add the Code</h2>
+<p>By creating an iOS playground with the Single View template, you will notice that the layout process is done in <code>layoutView</code>, given as follows.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">loadView</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">let</span> view = <span class="type">UIView</span>()</span><br><span class="line">      view.backgroundColor = .white</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">      label.frame = <span class="type">CGRect</span>(x: <span class="number">150</span>, y: <span class="number">200</span>, width: <span class="number">200</span>, height: <span class="number">20</span>)</span><br><span class="line">      label.text = <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line">      label.textColor = .black</span><br><span class="line"></span><br><span class="line">      view.addSubview(label)</span><br><span class="line">      <span class="keyword">self</span>.view = view</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>However, as far as I've noticed, writing the codes for layout within <code>layoutView</code> works fine for the older version of Swift Playground in iOS 12, it causes layout problems in iOS 13, with a newer version of Swift Playground. You can try <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Frost-Lee/Now-You-Hear-Me/tree/9c11d0b65f04970432c8c0b799a9a96107e8675d">this</a> older version of Swift Playground and see whether the layout works fine on your device. To fix the layout problem that the newer version brings, I'd suggest you only write the code for instantiating <code>view</code> instance of the <code>UIViewController</code> in <code>loadView</code>, and leave any other layout code for <code>viewDidLoad()</code>, as we usually do for normal iOS projects.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">loadView</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.loadView()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span>.view = backgroundView</span><br><span class="line">    backgroundView.backgroundColor = backgroundColor</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">  	<span class="comment">// Layout code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="applying-constraint-programmatically">Applying Constraint Programmatically</h2>
+<p>Since we've figured out where we should add the code for layout, now it's time to implement them.</p>
+<h3 id="anchors-of-uiview">Anchors of UIView</h3>
+<p>The essence of the layout is to place the views to the right location in its container, and the so-called 'right location' is usually defined by the view's height and width, the distance to the view next to it, or the horizontal or vertical centering. <code>NSLayoutAnchor</code>, as one of the member variables of <code>UIView</code>, is the thing that forms the relation. There are anchors on each boundary of the view, width, and height, as well as the center. The name of the anchors including <code>topAnchor</code>, <code>bottomAnchor</code>, <code>leadingAnchor</code>, <code>trailingAnchor</code>, <code>widthAnchor</code>, <code>heightAnchor</code>, <code>centerXAnchor</code> and <code>centerYAnchor</code>.</p>
+<p>Before applying the constraint, do remember to set the view's <code>translatesAutoresizingMaskIntoConstraints</code> property to <code>false</code>, or the constraint would not take effect.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nView.translatesAutoresizingMaskIntoConstraints = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="activating-the-constraint">Activating the Constraint</h3>
+<p>For static layout, you just need to activate the <code>NSLayoutConstraint</code> in <code>loadView()</code>. By accessing the member method <code>constraint</code> of different anchors, it is easy to set up the relationship between anchors, say, constraints. Here are the sample codes.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSLayoutConstraint</span>.activate([</span><br><span class="line">    nView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: <span class="number">64</span>),</span><br><span class="line">    nView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -<span class="number">64</span>),</span><br><span class="line">    nView.topAnchor.constraint(equalTo: view.topAnchor, constant: <span class="number">64</span>),</span><br><span class="line">    nView.heightAnchor.constraint(equalToConstant: <span class="number">32</span>)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSLayoutConstraint</span>.activate([</span><br><span class="line">    sButton.widthAnchor.constraint(equalToConstant: <span class="number">160</span>),</span><br><span class="line">    sButton.heightAnchor.constraint(equalToConstant: <span class="number">48</span>),</span><br><span class="line">    sButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: <span class="number">0</span>),</span><br><span class="line">    sButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -<span class="number">32</span>)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p>Note that the <code>constant</code> parameter defines the deviation of the layout, the positive direction of the X and Y axis are right and down.</p>
+<h3 id="using-constraint-as-member-variable">Using Constraint as Member Variable</h3>
+<p>In some conditions, the layout needs to be changed (e.g. progress bars). The <code>NSLayoutConstraint</code> can be initialized and set active later on, as follows.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">var</span> vConstraint: <span class="type">NSLayoutConstraint!</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">init</span>(frame: <span class="type">CGRect</span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>.<span class="keyword">init</span>(frame: frame)</span><br><span class="line">    vConstraint = lView.heightAnchor.constraint(equalToConstant: <span class="number">16</span>)</span><br><span class="line">    vConstraint.isActive = <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To change the constraint (even with animation), use the following code.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UIView</span>.animate(</span><br><span class="line">    withDuration: timeInterval, </span><br><span class="line">    delay: <span class="number">0</span>, </span><br><span class="line">    options: .curveEaseInOut,</span><br><span class="line">    animations: &#123;</span><br><span class="line">      	vConstraint.constant = <span class="number">32</span></span><br><span class="line">      	<span class="keyword">self</span>.layoutIfNeeded()</span><br><span class="line">    &#125;, </span><br><span class="line">    completion: <span class="literal">nil</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="write-a-mark-up">Write a Mark Up</h1>
+<p>The mark up is used to instruct the users to use your Swift Playground, sometimes modify your code a little. Basically, variables that can be assigned to new values in <code>Contents.swift</code> are global variables, say, variables defined outside the class or structure and marked as <code>public</code> in files in <code>./Sources/</code> folder.</p>
+<p>For the details of the mark up language, you can refer to <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/index.html#//apple_ref/doc/uid/TP40016497-CH2-SW1">Apple's Document</a>.</p>
+<h1 id="debugging-tips">Debugging Tips</h1>
+<p>The debug process is tough for Swift Playground projects since you cannot add breakpoints<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Using the 'Step Though My Code' or 'Step Slowly' could be a solution, but they are still not fancy. Most of the time, the developing process is simply write -&gt; AirDrop to your iPad -&gt; run and find error -&gt; again, it is not odd to see almost a hundred duplicated playground files in your Swift Playgrounds app when you are debugging. Sometimes, methods such as commenting the doubtful code or use <code>UITextField</code> as an output console (stupid option, but it is true that the console is not available on iPad, which means you could not simply <code>print</code> and check the errors) would help a little. Anyway, good luck with that!</p>
+<h1 id="reference">Reference</h1>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>https://stackoverflow.com/questions/29710286/debug-breakpoint-in-swift-playground<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/Swift/" rel="tag"># Swift</a>
+              <a href="/tags/Swift-Playground/" rel="tag"># Swift Playground</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/german-visa-application/" rel="prev" title="德国交换签证申请">
+      <i class="fa fa-chevron-left"></i> 德国交换签证申请
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/length-telomere/" rel="next" title="Predicting Human Age with the Length of Telomere">
+      Predicting Human Age with the Length of Telomere <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#adding-source-file-to-your-project"><span class="nav-number">1.</span> <span class="nav-text">Adding Source File to Your Project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#layout-your-interface"><span class="nav-number">2.</span> <span class="nav-text">Layout Your Interface</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#where-to-add-the-code"><span class="nav-number">2.1.</span> <span class="nav-text">Where to Add the Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applying-constraint-programmatically"><span class="nav-number">2.2.</span> <span class="nav-text">Applying Constraint Programmatically</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#anchors-of-uiview"><span class="nav-number">2.2.1.</span> <span class="nav-text">Anchors of UIView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activating-the-constraint"><span class="nav-number">2.2.2.</span> <span class="nav-text">Activating the Constraint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using-constraint-as-member-variable"><span class="nav-number">2.2.3.</span> <span class="nav-text">Using Constraint as Member Variable</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#write-a-mark-up"><span class="nav-number">3.</span> <span class="nav-text">Write a Mark Up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debugging-tips"><span class="nav-number">4.</span> <span class="nav-text">Debugging Tips</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Frost Lee"
+      src="/images/Avatar.png">
+  <p class="site-author-name" itemprop="name">Frost Lee</p>
+  <div class="site-description" itemprop="description">Civilize the age.</div>
+</div>
+
+
+   <div class="feed-link motion-element">
+     <a href="/atom.xml" rel="alternate">
+       <i class="fa fa-rss"></i>
+       RSS
+     </a>
+   </div>
+ 
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Frost-Lee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Frost-Lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10068755/frost-lee" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10068755&#x2F;frost-lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact.FrostLee@gmail.com" title="E-Mail → mailto:contact.FrostLee@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frost Lee</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '13c40b3687a06d2c9a84',
+      clientSecret: '3ce983fcf815d6ee689b8e00d1bec23a7973c396',
+      repo        : 'Frost-Lee.github.io',
+      owner       : 'Frost-Lee',
+      admin       : ['Frost-Lee'],
+      id          : '/tip-playground/',
+        language: 'en',
+      distractionFreeMode: true,
+      proxy: 'http://209.250.236.3:8080/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

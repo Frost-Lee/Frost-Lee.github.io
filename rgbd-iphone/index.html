@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="dEKIskZSG1sj_B105kZnKupOw7mKVCXsSrXXim-FhqI">
+  <meta name="msvalidate.01" content="9896C95C563A05172CD78265E4243404">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"frost-lee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="A rectilinear RGBD image will help a lot in computer vision tasks, such as 3D reconstruction. This tutorial will illustrate how to capture RGBD data with iPhone, export the data to Python, and rectify">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Capture Rectilinear RGBD Data with iPhone">
+<meta property="og:url" content="https://frost-lee.github.io/rgbd-iphone/index.html">
+<meta property="og:site_name" content="Frost&#39;s Blog">
+<meta property="og:description" content="A rectilinear RGBD image will help a lot in computer vision tasks, such as 3D reconstruction. This tutorial will illustrate how to capture RGBD data with iPhone, export the data to Python, and rectify">
+<meta property="og:locale">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/x8CXGkwHuUM7zbjYwYHPXX.gif">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/XCpR2dbSM6swwrep75hNhP.png">
+<meta property="article:published_time" content="2019-11-08T15:02:38.000Z">
+<meta property="article:modified_time" content="2021-01-31T12:03:03.744Z">
+<meta property="article:author" content="Frost Lee">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg">
+
+<link rel="canonical" href="https://frost-lee.github.io/rgbd-iphone/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Capture Rectilinear RGBD Data with iPhone | Frost's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139409052-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-139409052-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Frost's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Frost's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frost's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://frost-lee.github.io/rgbd-iphone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.png">
+      <meta itemprop="name" content="Frost Lee">
+      <meta itemprop="description" content="Civilize the age.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frost's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Capture Rectilinear RGBD Data with iPhone
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-08 23:02:38" itemprop="dateCreated datePublished" datetime="2019-11-08T23:02:38+08:00">2019-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-31 20:03:03" itemprop="dateModified" datetime="2021-01-31T20:03:03+08:00">2021-01-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software-Developing/" itemprop="url" rel="index"><span itemprop="name">Software Developing</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>A rectilinear RGBD image will help a lot in computer vision tasks, such as 3D reconstruction. This tutorial will illustrate how to capture RGBD data with iPhone, export the data to Python, and rectify the data.<a id="more"></a> Code in this blog is available in <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Frost-Lee/insulin_calculator">this repository</a>.</p>
+<h1 id="capturing-photo-with-depth-map">Capturing Photo with Depth Map</h1>
+<p>For iOS devices with a dual camera or a TrueDepth camera, they are able to provide depth data when capturing an image. However, the depth data is provided only when requested. This section will focus on capturing a photo with depth data using <code>AVFoundation</code>.</p>
+<p>If you still don't know how to take an image with <code>AVFoundation</code>, some other tutorials will help, such as <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/capturing_still_and_live_photos">Capturing Still and Live Photos</a>. Briefly speaking, to capture an image with <code>AVFoundation</code>, a capture session needs to be built and configured.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">captureSession = <span class="type">AVCaptureSession</span>()</span><br></pre></td></tr></table></figure>
+<p>The configuration includes the capture device configuration, input configuration, output configuration and handling, preview output, and capture settings. By adjusting some configurations in the session, the depth data will be provided along with the capture result. The rest part of this section will focus on configuring such a session.</p>
+<h2 id="capture-device-configuration">Capture Device Configuration</h2>
+<p>According to <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/capturing_photos_with_depth">Apple's document</a>, <code>builtInDualCamera</code> and <code>builtInTrueDepthCamera</code> are able to provide photos with depth maps. To make it possible for your pipeline to output a depth map, you need to select one of these two cameras when instantiating your <code>AVCaptureDevice</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: Although both cameras are able to output depth maps, the two cameras are based on different principles. <code>builtInDualCamera</code> will conclude the depth data using binocular stereo vision algorithms, which seeks feature points in the two images captured by two cameras and conclude the depth. This algorithm will be easily affected: darkness or textureless images will cause problems for this algorithm. <code>builtInTrueDepthCamera</code>, on the other hand, is a structured light system, like Kinect. It projects infrared laser dots to the object, then analyzes the pattern of the projected dots to conclude the depth. In brief, depth maps provided by <code>builtInTrueDepthCamera</code> are much more accurate than it provided by <code>builtInDualCamera</code>.</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">imageCaptureDevice = <span class="type">AVCaptureDevice</span>.<span class="keyword">default</span>(</span><br><span class="line">    .builtInTrueDepthCamera,</span><br><span class="line">    <span class="keyword">for</span>: .depthData,</span><br><span class="line">    position: .unspecified</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="input-output-configuration">Input / Output Configuration</h2>
+<p>The following code will help to configure the input and output of the capture session. Whenever you need to change the configuration, remember to call <code>beginConfiguration()</code> and <code>commitConfiguration()</code> before and afterward.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deviceInput = <span class="keyword">try</span>! <span class="type">AVCaptureDeviceInput</span>(device: imageCaptureDevice)</span><br><span class="line">captureSession.beginConfiguration()</span><br><span class="line">captureSession.sessionPreset = .photo</span><br><span class="line">captureSession.addInput(deviceInput)</span><br><span class="line">captureSession.commitConfiguration()</span><br></pre></td></tr></table></figure>
+<p>By setting <code>isDepthDataDeliveredEnabled</code> to <code>true</code> of the photo output, you are one step closer to outputting the depth map.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">captureSession.beginConfiguration()</span><br><span class="line">photoOutput = <span class="type">AVCapturePhotoOutput</span>()</span><br><span class="line">captureSession.addOutput(photoOutput)</span><br><span class="line">captureSession.commitConfiguration()</span><br><span class="line">photoOutput.isDepthDataDeliveryEnabled = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="video-preview-setup">Video Preview Setup</h2>
+<p>Theoretically, you can start capturing the image with such a configuration. But no one wants a camera which they can't see anything when they are taking a photo. Thus, we need to set up a preview layer for the session so that people will see what will be captured before they press the button. You can instantiate the preview layer of the session with the following code.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">previewLayer = <span class="type">AVCaptureVideoPreviewLayer</span>(session: captureSession)</span><br><span class="line">previewLayer.videoGravity = .resizeAspectFill</span><br></pre></td></tr></table></figure>
+<p>Then, by inserting the layer into a <code>UIView</code> object and adjust its <code>frame</code> property, you can make the preview layer visible.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    previewContainerView.layer.insertSublayer(previewLayer, at: <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLayoutSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLayoutSubviews()</span><br><span class="line">  	<span class="comment">// ...</span></span><br><span class="line">    previewLayer.frame = previewContainerView.bounds</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="running-and-stopping-the-session">Running and Stopping the Session</h2>
+<p>The <code>AVCaptureSession</code> is a resource-consuming task. By starting and stopping the session in proper time, you will prevent wasting extra energy on the cell phone. After starting the session, you should be able to see the preview working.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillAppear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewWillAppear(animated)</span><br><span class="line">  	<span class="comment">// ...</span></span><br><span class="line">  	captureSession.startRunning()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillDisappear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewWillDisappear(animated)</span><br><span class="line">  	<span class="comment">// ...</span></span><br><span class="line">  	captureSession.stopRunning()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="capturing-the-rgbd-data">Capturing the RGBD Data</h2>
+<p>When the user (or, more likely, you) press the capture button, it's time to tell the capture session to capture an image. This step needs you to pass an <code>AVCapturePhotoSettings</code> parameter which specifies the setting of this capture. Setting <code>isDepthDataDeliveryEnabled</code> to <code>true</code> will let the capture session passing you the depth data. The raw depth data contain lots of holes where the depth data is not available. Setting <code>isDepthDataFiltered</code> to <code>true</code> will tell the system to fill those wholes. Of course, you can set it to <code>false</code> and choose your own algorithm to handle the holes. Just mind the representation of those holes.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> photoSettings = <span class="type">AVCapturePhotoSettings</span>()</span><br><span class="line">photoSettings.isDepthDataDeliveryEnabled = <span class="literal">true</span></span><br><span class="line">photoSettings.isDepthDataFiltered = <span class="literal">true</span></span><br><span class="line">photoOutput.capturePhoto(with: photoSettings, delegate: <span class="keyword">self</span>)</span><br></pre></td></tr></table></figure>
+<p>You can get the result of the capture by delegating <code>AVCapturePhotoCaptureDelegate</code>. The processed result will be passed to <code>photoOutput(_:didFinishProcessingPhoto:error:)</code>.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">photoOutput</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="number">_</span> output: AVCapturePhotoOutput,</span></span></span><br><span class="line"><span class="function"><span class="params">    didFinishProcessingPhoto photo: AVCapturePhoto,</span></span></span><br><span class="line"><span class="function"><span class="params">    error: Error?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span> &#123;</span><br><span class="line">  	<span class="comment">// Result handling</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="data-type-convert-and-export">Data Type Convert and Export</h1>
+<p>You are able to capture an image with a depth map now. However, the data is still represented in Apple's own format. If you feel better working with other frameworks such as Python (like me), exporting the captured data will be a good idea.</p>
+<h2 id="export-the-image">Export the Image</h2>
+<p>Compared with the depth map, the image itself is not hard to obtain. by calling <code>fileDataRepresentation()</code> or <code>cgImageRepresentation()!.takeUnretainedValue()</code> of the <code>AVCapturePhoto</code> object, you are able to access the jpeg / HEVC data or <code>CGImage</code> object of the captured image. Then the data is ready to be shared. You can save the data to the user's album or use other methods such as presenting <code>UIActivityViewController</code> or posting the data to a server to share it.</p>
+<h2 id="export-the-depth-map">Export the Depth Map</h2>
+<p>Compared with the colored image, the depth map is a little bit hard to read since it's not actually an image but a 2-dimensional array. The <code>AVCapturePhoto</code>'s <code>depthData</code> property is used to store the depth map related data, while the <code>depthMap</code> property of <code>AVDepthData</code> is used to contain the depth map itself, which is represented as a <code>CVPixelBuffer</code> object. There are some other properties of <code>AVDepthData</code> that help us rectifying and reconstructing the RGBD data, and they should also be recorded.</p>
+<h3 id="convert-depth-map">Convert Depth Map</h3>
+<p>My original thought is to directly export the depth map to a JSON file format. Unluckily, the <code>CVPixelBuffer</code> object does not conform to <code>Codable</code> protocol. Another thought is to read the data one by one and write them to another array, then wrap it into a JSON file. This sounds a little stupid, but it works.</p>
+<p>The implementation is to get the pointer of the <code>CVPixelBuffer</code>, then cast the bits to <code>Float32</code>, and read the values one by one. Before casting, you will need to use the following line to convert the data in the pixel buffer to 32 bit values. If not, the data might be 16 bit, and it could be disparity values, not depth.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> convertedDepthMap = photo.depthData!.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32).depthDataMap</span><br></pre></td></tr></table></figure>
+<p>And here is the implementation that converts a <code>CVPixelBuffer</code> object containing depth data into a <code>Float32</code> array.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">convertDepthData</span><span class="params">(depthMap: CVPixelBuffer)</span></span> -&gt; [[<span class="type">Float32</span>]] &#123;</span><br><span class="line">    <span class="keyword">let</span> width = <span class="type">CVPixelBufferGetWidth</span>(depthMap)</span><br><span class="line">    <span class="keyword">let</span> height = <span class="type">CVPixelBufferGetHeight</span>(depthMap)</span><br><span class="line">    <span class="keyword">var</span> convertedDepthMap: [[<span class="type">Float32</span>]] = <span class="type">Array</span>(</span><br><span class="line">        repeating: <span class="type">Array</span>(repeating: <span class="number">0</span>, <span class="built_in">count</span>: width),</span><br><span class="line">        <span class="built_in">count</span>: height</span><br><span class="line">    )</span><br><span class="line">    <span class="type">CVPixelBufferLockBaseAddress</span>(depthMap, <span class="type">CVPixelBufferLockFlags</span>(rawValue: <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">let</span> floatBuffer = <span class="built_in">unsafeBitCast</span>(</span><br><span class="line">        <span class="type">CVPixelBufferGetBaseAddress</span>(depthMap),</span><br><span class="line">        to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Float32</span>&gt;.<span class="keyword">self</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="number">0</span> ..&lt; height &#123;</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> <span class="number">0</span> ..&lt; width &#123;</span><br><span class="line">            convertedDepthMap[row][col] = floatBuffer[width * row + col]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">CVPixelBufferUnlockBaseAddress</span>(depthMap, <span class="type">CVPixelBufferLockFlags</span>(rawValue: <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">return</span> convertedDepthMap</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="convert-calibration-data">Convert Calibration Data</h3>
+<p>The camera <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/documentation/avfoundation/avdepthdata/2881230-cameracalibrationdata">calibration data</a> will provide import calibration data. Here are some fields that I'm interested in.</p>
+<ul>
+<li><code>intrinsicMatrix</code>: This matrix will provide information about the optical center and the focal length camera.</li>
+<li><code>pixelSize</code>: The size of the pixel. This is useful since values in <code>intrinsicMatrix</code> are expressed in pixels.</li>
+<li><code>intrinsicMatrixReferenceDimensions</code>: Since the size of the depth map and the colored image are different, it will be useful to know which size are the reference coordinate and convert the related data if necessary.</li>
+<li><code>lensDistortionCenter</code>: Useful when correcting the lens distortion.</li>
+<li><code>lensDistortionLookupTable</code>: This is used to provide the necessary magnification values when rectifying a distorted image.</li>
+<li><code>inverseLensDistortionLookupTable</code>: This is used to provide the necessary magnification values when distorting a rectified image.</li>
+</ul>
+<p>The above properties except <code>lensDistortionLookupTable</code> and <code>inverseLensDistortionLookupTable</code> are obvious to be converted to float or float array values. For these two properties of type <code>Data</code>, they are actually an array of <code>Float</code> and can be converted to <code>Float</code> array with the following method.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">convertLensDistortionLookupTable</span><span class="params">(lookupTable: Data)</span></span> -&gt; [<span class="type">Float</span>] &#123;</span><br><span class="line">    <span class="keyword">let</span> tableLength = lookupTable.<span class="built_in">count</span> / <span class="type">MemoryLayout</span>&lt;<span class="type">Float</span>&gt;.size</span><br><span class="line">    <span class="keyword">var</span> floatArray: [<span class="type">Float</span>] = <span class="type">Array</span>(repeating: <span class="number">0</span>, <span class="built_in">count</span>: tableLength)</span><br><span class="line">    <span class="number">_</span> = floatArray.withUnsafeMutableBytes&#123;lookupTable.copyBytes(to: $<span class="number">0</span>)&#125;</span><br><span class="line">    <span class="keyword">return</span> floatArray</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="data-wrapping">Data Wrapping</h2>
+<p>With the help of <code>JSONSerialization</code>, it's possible to wrap the depth map and calibration data into a <code>Data</code> object, which can be decoded as a JSON string. In Swift, you can directly write the <code>Data</code> object to disk and get the URL, and then it's an open question for you to share the file. Here's a sample implementation of the data wrapper.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wrapEstimateImageData</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    depthMap: CVPixelBuffer,</span></span></span><br><span class="line"><span class="function"><span class="params">    calibration: AVCameraCalibrationData,</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span> -&gt; <span class="type">Data</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> jsonDict: [<span class="type">String</span> : <span class="type">Any</span>] = [</span><br><span class="line">        <span class="string">&quot;calibration_data&quot;</span> : [</span><br><span class="line">            <span class="string">&quot;intrinsic_matrix&quot;</span> : (<span class="number">0</span> ..&lt; <span class="number">3</span>).<span class="built_in">map</span>&#123; x <span class="keyword">in</span></span><br><span class="line">                (<span class="number">0</span> ..&lt; <span class="number">3</span>).<span class="built_in">map</span>&#123; y <span class="keyword">in</span> calibration.intrinsicMatrix[x][y]&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;pixel_size&quot;</span> : calibration.pixelSize,</span><br><span class="line">            <span class="string">&quot;intrinsic_matrix_reference_dimensions&quot;</span> : [</span><br><span class="line">                calibration.intrinsicMatrixReferenceDimensions.width,</span><br><span class="line">                calibration.intrinsicMatrixReferenceDimensions.height</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;lens_distortion_center&quot;</span> : [</span><br><span class="line">                calibration.lensDistortionCenter.x,</span><br><span class="line">                calibration.lensDistortionCenter.y</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;lens_distortion_lookup_table&quot;</span> : convertLensDistortionLookupTable(</span><br><span class="line">                lookupTable: calibration.lensDistortionLookupTable!</span><br><span class="line">            ),</span><br><span class="line">            <span class="string">&quot;inverse_lens_distortion_lookup_table&quot;</span> : convertLensDistortionLookupTable(</span><br><span class="line">                lookupTable: calibration.inverseLensDistortionLookupTable!</span><br><span class="line">            )</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&quot;depth_data&quot;</span> : convertDepthData(depthMap: depthMap)</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">let</span> jsonStringData = <span class="keyword">try</span>! <span class="type">JSONSerialization</span>.data(</span><br><span class="line">        withJSONObject: jsonDict,</span><br><span class="line">        options: .prettyPrinted</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> jsonStringData</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="displaying-in-jupyter-notebook">Displaying in Jupyter Notebook</h2>
+<p>I choose to POST the image as a .jpg file and the wrapped depth data as a .json file to my server. To present the data you've got, using Jupyter Notebook is one of the easiest ways. You can extract the colored image and the depth map as <code>numpy.array</code> and visualize them using <code>matplotlib.pyplot</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/path/to/file.json&#x27;</span>) <span class="keyword">as</span> in_file:</span><br><span class="line">    json_content = json.loads(in_file.read())</span><br><span class="line">    depth_map = np.array(json_content[<span class="string">&#x27;depth_data&#x27;</span>]).astype(<span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line">plt.imshow(depth_map)</span><br><span class="line">plt.colorbar()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">image = np.array(Image.<span class="built_in">open</span>(<span class="string">&#x27;/path/to/file.jpg&#x27;</span>))</span><br><span class="line">plt.imshow(image)</span><br></pre></td></tr></table></figure>
+<p><img src="http://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg" alt="Color Depth" /></p>
+<h1 id="rectify-distorted-rgbd-data">Rectify Distorted RGBD Data</h1>
+<p>Now we have obtained the colored image and the depth map, as well as necessary camera intrinsics. However, there's one thing that is not satisfied: the distortion. The colored image is distorted since they are not taken by pin-hole camera. The lenses will distort the image when they allow more light to come in. The depth map, in order to match the colored image, is also manually distorted by Apple. To improve the accuracy on computer vision tasks, both of them are supposed to be rectilinear, say, undistorted. Luckily, Apple has provided the necessary data to help us to undistort or re-distort the image: <code>lensDistortionLookupTable</code> and <code>inverseLensDistortionLookupTable</code>.</p>
+<p>For a more detailed explanation, you should refer to <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/videos/play/wwdc2017/507/">WWDC 17 session: Capturing Depth in iPhone Photography</a>. In brief, the lookup table provides the magnification along the radius of the image: the line from the distortion center to the farthest corner of the image. In order to compensate the distortion, we can use the lookup table to determine the original coordinate of the pixel and put them in the right position.</p>
+<p>By passing <code>lensDistortionLookupTable</code>, this C method will help to calculate the distorted point position of a given point. It determines the radius of the image, the distance between the provided point and the distortion center (<code>radius_point</code>), calculates the magnification by linear interpolation values in the lookup table, and finally concludes the position after distortion using the calculated magnification. You can pass the <code>inverseLensDistortionLookupTable</code> to do the inverse calculation.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>* <span class="title">get_lens_distortion_point</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span>* point, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span>* lookup_table, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> lookup_table_len, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span>* distortion_center, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span>* image_size</span></span></span><br><span class="line"><span class="function"><span class="params">)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> radius_max_x = distortion_center[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">double</span> radius_max_y = distortion_center[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (image_size[<span class="number">0</span>] - radius_max_x &gt; radius_max_x) &#123;</span><br><span class="line">        radius_max_x = image_size[<span class="number">0</span>] - radius_max_x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (image_size[<span class="number">1</span>] - radius_max_y &gt; radius_max_y) &#123;</span><br><span class="line">        radius_max_y = image_size[<span class="number">1</span>] - radius_max_y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> radius_max = <span class="built_in">sqrt</span>(<span class="built_in">pow</span>(radius_max_x, <span class="number">2</span>) + <span class="built_in">pow</span>(radius_max_y, <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> radius_point_x = point[<span class="number">0</span>] - distortion_center[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">double</span> radius_point_y = point[<span class="number">1</span>] - distortion_center[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">double</span> radius_point = <span class="built_in">sqrt</span>(<span class="built_in">pow</span>(radius_point_x, <span class="number">2</span>) + <span class="built_in">pow</span>(radius_point_y, <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> magnification = lookup_table[lookup_table_len - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (radius_point &lt; radius_max) &#123;</span><br><span class="line">        <span class="keyword">double</span> relative_position = radius_point / radius_max * (lookup_table_len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">double</span> frac = relative_position - (<span class="keyword">int</span>)<span class="built_in">floor</span>(relative_position);</span><br><span class="line">        <span class="keyword">double</span> lower_lookup = lookup_table[(<span class="keyword">int</span>)<span class="built_in">floor</span>(relative_position)];</span><br><span class="line">        <span class="keyword">double</span> upper_lookup = lookup_table[(<span class="keyword">int</span>)<span class="built_in">ceil</span>(relative_position)];</span><br><span class="line">        magnification = lower_lookup * (<span class="number">1.0</span> - frac) + upper_lookup * frac;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span>* mapped_point = (<span class="keyword">double</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">double</span>) * <span class="number">2</span>);</span><br><span class="line">    mapped_point[<span class="number">0</span>] = distortion_center[<span class="number">0</span>] + radius_point_x * (<span class="number">1.0</span> + magnification);</span><br><span class="line">    mapped_point[<span class="number">1</span>] = distortion_center[<span class="number">1</span>] + radius_point_y * (<span class="number">1.0</span> + magnification);</span><br><span class="line">    <span class="keyword">return</span> mapped_point;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>To rectify the whole image, you will need to create a new empty image. For each pixel in the new image, calculate the distorted position of the point, then fill the pixel with the value of the distorted position in the distorted image. This is a time-consuming step since you will need to iterate all pixels in the image, that is the reason why this method is implemented in C instead of Python or Swift. The implementation is as follows.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span>* <span class="title">rectify_image</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span>* image, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> width, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> height, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> channel, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span>* lookup_table, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> lookup_table_len, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span>* distortion_center</span></span></span><br><span class="line"><span class="function"><span class="params">)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> image_size[<span class="number">2</span>] = &#123;width, height&#125;;</span><br><span class="line">    <span class="keyword">double</span>* rectified_image = (<span class="keyword">double</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">double</span>) * width * height * channel);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; width; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; height; j ++) &#123;</span><br><span class="line">            <span class="keyword">int</span> rectified_index[<span class="number">2</span>] = &#123;i, j&#125;;</span><br><span class="line">            <span class="keyword">double</span>* original_index = get_lens_distortion_point(</span><br><span class="line">                rectified_index,</span><br><span class="line">                lookup_table,</span><br><span class="line">                lookup_table_len,</span><br><span class="line">                distortion_center,</span><br><span class="line">                image_size</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> ((<span class="keyword">int</span>)original_index[<span class="number">0</span>] &lt; <span class="number">0</span> || (<span class="keyword">int</span>)original_index[<span class="number">0</span>] &gt;= width ||</span><br><span class="line">                (<span class="keyword">int</span>)original_index[<span class="number">1</span>] &lt; <span class="number">0</span> || (<span class="keyword">int</span>)original_index[<span class="number">1</span>] &gt;= height) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">memcpy</span>(</span><br><span class="line">                rectified_image + (i * height + j) * channel, </span><br><span class="line">                image + ((<span class="keyword">int</span>)original_index[<span class="number">0</span>] * height + (<span class="keyword">int</span>)original_index[<span class="number">1</span>]) * channel,</span><br><span class="line">                channel * <span class="keyword">sizeof</span>(<span class="keyword">double</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="built_in">free</span>(original_index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rectified_image;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Besides, you will want to write another method to free the allocated memory since the returned values are allocated but not freed in the method.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free_double_pointer</span><span class="params">(<span class="keyword">double</span>* ptr)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(ptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Suppose your .c file name is <code>undistort.c</code>, the following command will compile the code to a .so file, which makes it possible for you to bridge this method to Python using <code>ctypes</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc -fPIC -shared -o undistort.so undistort.c</span><br></pre></td></tr></table></figure>
+<p>Finally, it's time to wrap the C method into a Python method. <code>ctypes</code> will help you to convert the data type when passing the arguments. Though Python is a dynamic type language, you have to be extremely cautious with data types here since you are communicating with C. The numpy array is type converted when passing as the argument since the image may not be of type <code>double</code> (for instance, the default dtype for the colored image is <code>uint_8</code>).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">undistort_dll = ctypes.CDLL(<span class="string">&#x27;/path/to/file.so&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rectify_image_c</span>(<span class="params">image, lookup_table, distortion_center</span>):</span></span><br><span class="line">    c_rectify_image = undistort_dll.rectify_image</span><br><span class="line">    c_rectify_image.restype = ctypes.POINTER(ctypes.c_double * functools.reduce(<span class="keyword">lambda</span> x, y: x * y, image.shape))</span><br><span class="line">    c_free_double_pointer = undistort_dll.free_double_pointer</span><br><span class="line">    c_free_double_pointer.restype = <span class="literal">None</span></span><br><span class="line">    channel = <span class="number">1</span> <span class="keyword">if</span> <span class="built_in">len</span>(image.shape) &lt; <span class="number">3</span> <span class="keyword">else</span> image.shape[<span class="number">2</span>]</span><br><span class="line">    original_datatype = image.dtype</span><br><span class="line">    image = np.ascontiguousarray(image.astype(<span class="string">&#x27;double&#x27;</span>))</span><br><span class="line">    raw_result = c_rectify_image(</span><br><span class="line">        image.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),</span><br><span class="line">        image.shape[<span class="number">0</span>],</span><br><span class="line">        image.shape[<span class="number">1</span>],</span><br><span class="line">        channel,</span><br><span class="line">        (ctypes.c_double * <span class="built_in">len</span>(lookup_table))(*lookup_table),</span><br><span class="line">        <span class="built_in">len</span>(lookup_table),</span><br><span class="line">        (ctypes.c_double * <span class="number">2</span>)(*distortion_center)</span><br><span class="line">    ).contents</span><br><span class="line">    reshaped_result = np.reshape(raw_result, image.shape).astype(original_datatype)</span><br><span class="line">    c_free_double_pointer(raw_result)</span><br><span class="line">    <span class="keyword">return</span> reshaped_result</span><br></pre></td></tr></table></figure>
+<p>By calling the Python method and pass the image as numpy array along with <code>lensDistortionLookupTable</code>, you are able to rectify the image. Note that the position of <code>lensDistortionCenter</code> refers to <code>intrinsicMatrixReferenceDimensions</code>. If your image size does not conform to it, remap the position of <code>lensDistortionCenter</code> accordingly.</p>
+<p>It's more obvious to use a gif to compare the difference between the original image and rectified image.</p>
+<p><img src="http://209.250.236.3:1910/bloghost/x8CXGkwHuUM7zbjYwYHPXX.gif" alt="Comparison" /></p>
+<h1 id="visualization">Visualization</h1>
+<p>By making use of the rectified RBGD image as well as the camera calibration data, we are able to project the image into 3D space as a point cloud. This method is extremely easy to implement. Here, you will need the optical center coordinate and the focal length.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get_3d_coordinate</span>(<span class="params">row, col, fl, oc_x, oc_y, depth</span>):</span></span><br><span class="line">    <span class="keyword">return</span> np.array([(row - oc_x) * depth / fl, (col - oc_y) * depth / fl, depth])</span><br></pre></td></tr></table></figure>
+<p>By using <code>open3d</code> or <code>pptk</code>, you will be able to visualize the point cloud.</p>
+<p><img src="http://209.250.236.3:1910/bloghost/XCpR2dbSM6swwrep75hNhP.png" alt="Point Cloud" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/Swift/" rel="tag"># Swift</a>
+              <a href="/tags/C/" rel="tag"># C</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/farewell-vienna/" rel="prev" title="离别的维也纳没有钢琴">
+      <i class="fa fa-chevron-left"></i> 离别的维也纳没有钢琴
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/memo-time-series/" rel="next" title="A Memo for Time Series Analysis">
+      A Memo for Time Series Analysis <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#capturing-photo-with-depth-map"><span class="nav-number">1.</span> <span class="nav-text">Capturing Photo with Depth Map</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#capture-device-configuration"><span class="nav-number">1.1.</span> <span class="nav-text">Capture Device Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input-output-configuration"><span class="nav-number">1.2.</span> <span class="nav-text">Input &#x2F; Output Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#video-preview-setup"><span class="nav-number">1.3.</span> <span class="nav-text">Video Preview Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#running-and-stopping-the-session"><span class="nav-number">1.4.</span> <span class="nav-text">Running and Stopping the Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capturing-the-rgbd-data"><span class="nav-number">1.5.</span> <span class="nav-text">Capturing the RGBD Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data-type-convert-and-export"><span class="nav-number">2.</span> <span class="nav-text">Data Type Convert and Export</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#export-the-image"><span class="nav-number">2.1.</span> <span class="nav-text">Export the Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#export-the-depth-map"><span class="nav-number">2.2.</span> <span class="nav-text">Export the Depth Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#convert-depth-map"><span class="nav-number">2.2.1.</span> <span class="nav-text">Convert Depth Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#convert-calibration-data"><span class="nav-number">2.2.2.</span> <span class="nav-text">Convert Calibration Data</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data-wrapping"><span class="nav-number">2.3.</span> <span class="nav-text">Data Wrapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#displaying-in-jupyter-notebook"><span class="nav-number">2.4.</span> <span class="nav-text">Displaying in Jupyter Notebook</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rectify-distorted-rgbd-data"><span class="nav-number">3.</span> <span class="nav-text">Rectify Distorted RGBD Data</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#visualization"><span class="nav-number">4.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Frost Lee"
+      src="/images/Avatar.png">
+  <p class="site-author-name" itemprop="name">Frost Lee</p>
+  <div class="site-description" itemprop="description">Civilize the age.</div>
+</div>
+
+
+   <div class="feed-link motion-element">
+     <a href="/atom.xml" rel="alternate">
+       <i class="fa fa-rss"></i>
+       RSS
+     </a>
+   </div>
+ 
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Frost-Lee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Frost-Lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10068755/frost-lee" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10068755&#x2F;frost-lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact.FrostLee@gmail.com" title="E-Mail → mailto:contact.FrostLee@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frost Lee</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '13c40b3687a06d2c9a84',
+      clientSecret: '3ce983fcf815d6ee689b8e00d1bec23a7973c396',
+      repo        : 'Frost-Lee.github.io',
+      owner       : 'Frost-Lee',
+      admin       : ['Frost-Lee'],
+      id          : '/rgbd-iphone/',
+        language: 'en',
+      distractionFreeMode: true,
+      proxy: 'http://209.250.236.3:8080/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

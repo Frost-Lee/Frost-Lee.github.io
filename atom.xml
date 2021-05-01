@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Frost&#39;s Blog</title>
+  
+  <subtitle>Frost&#39;s Blog</subtitle>
+  <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://frost-lee.github.io/"/>
+  <updated>2021-04-11T14:56:50.362Z</updated>
+  <id>https://frost-lee.github.io/</id>
+  
+  <author>
+    <name>Frost Lee</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>聊一聊 2021 年的申请季</title>
+    <link href="https://frost-lee.github.io/2021-application-season/"/>
+    <id>https://frost-lee.github.io/2021-application-season/</id>
+    <published>2021-04-11T07:10:01.000Z</published>
+    <updated>2021-04-11T14:56:50.362Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;马上就要到 2021 年的 4 月 15 日了：这是很多美国学校给学生做出是否接受 offer 决定的 deadline，也算是预示着繁忙的申请季的初步结束。雁过留痕，在我两三年来的凶猛操作接近尾声的时候，我也应该记录点什么。我在文章后面附带了对之后的同学们申请有参考价值的信息，但是，我写这篇文章的本意并不是想写一个经验贴教别人做事。我只是想把这段经历写成一个故事，给别人看，也给自己看。</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+    <category term="My Story" scheme="https://frost-lee.github.io/tags/My-Story/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>On-Device Semantic Segmentation with Core ML</title>
+    <link href="https://frost-lee.github.io/segmentation-coreml/"/>
+    <id>https://frost-lee.github.io/segmentation-coreml/</id>
+    <published>2021-02-12T05:09:16.000Z</published>
+    <updated>2021-03-11T13:52:55.166Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Core ML offers a great way for conducting machine learning on Apple devices. Developers could download existing Core ML models from various sources such as &lt;a href=&quot;https://developer.apple.com/machine-learning/models/&quot;&gt;here&lt;/a&gt; or train a model from various templates in CreateML. For more flexibility, they could also train a model with other frameworks and convert it to Core ML. This article records my experiment on conducting on-device semantic segmentation by converting a Keras model to Core ML.</summary>
+    
+    
+    
+    <category term="Software Developing" scheme="https://frost-lee.github.io/categories/Software-Developing/"/>
+    
+    
+    <category term="iOS" scheme="https://frost-lee.github.io/tags/iOS/"/>
+    
+    <category term="Machine Learning" scheme="https://frost-lee.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python Interpreter on macOS</title>
+    <link href="https://frost-lee.github.io/macos-python/"/>
+    <id>https://frost-lee.github.io/macos-python/</id>
+    <published>2020-10-05T03:20:33.000Z</published>
+    <updated>2021-01-29T09:06:53.887Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Python has made life extremely easy for developers and data scientists, at least most of the time. One exception that ruins their life is dealing with Python versions. There would sometimes be lots of Pythons existing on a Mac at the same time. Where are they from? Are they provided by Apple? Which one am I using? Where did the packages I installed go? This article would give some insights into those questions.</summary>
+    
+    
+    
+    <category term="Developer General" scheme="https://frost-lee.github.io/categories/Developer-General/"/>
+    
+    
+    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
+    
+    <category term="macOS" scheme="https://frost-lee.github.io/tags/macOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《由加利福尼亚州 Apple 公司设计》序言</title>
+    <link href="https://frost-lee.github.io/designed-apple/"/>
+    <id>https://frost-lee.github.io/designed-apple/</id>
+    <published>2020-07-26T09:06:25.000Z</published>
+    <updated>2020-07-27T12:41:20.445Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.apple.com/designed-by-apple/&quot;&gt;《Designed by Apple in California》&lt;/a&gt; 是 Apple 在 2016 年推出的一本设计图册。这是一本几乎没有文字的书，但其中精心拍摄的产品图片记录着 Apple 从 1998 年到 2015 年的历史，也记录着站在这些产品背后的人。推出之始，这本书的价格对我来说无疑劝退，但当四年之后它濒临售罄时，我终于再度想起了它，并通过日本的代购让其中的一本远渡重洋，来到了我的手中。</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+    <category term="Book Review" scheme="https://frost-lee.github.io/tags/Book-Review/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最长的一天</title>
+    <link href="https://frost-lee.github.io/longest-day/"/>
+    <id>https://frost-lee.github.io/longest-day/</id>
+    <published>2020-05-16T18:15:10.000Z</published>
+    <updated>2020-07-16T16:31:07.389Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在 20 岁临近末尾的时候，我的生活发生了最令人激动的变化之一：我决定打破中规中矩的本科生活，选择用延迟毕业一年的代价，参加一次在德国的学期交换以及一次美国的访问学者项目。大约 5 个月后，我出现在凌晨的慕尼黑机场里，来回踱步以化解困意。那是我保持相对清醒最长的一次，也是我觉得最能概括我游学经历的一天。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Setting Up Shadowsocks Service on an Ubuntu Server</title>
+    <link href="https://frost-lee.github.io/shadowsocks-ubuntu/"/>
+    <id>https://frost-lee.github.io/shadowsocks-ubuntu/</id>
+    <published>2020-01-25T04:45:19.000Z</published>
+    <updated>2021-01-29T11:19:59.971Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;This tutorial illustrates steps for setting up a Shadowsocks server on Ubuntu system. Time to embrace a bigger world!</summary>
+    
+    
+    
+    <category term="Developer General" scheme="https://frost-lee.github.io/categories/Developer-General/"/>
+    
+    
+    <category term="Shadowsocks" scheme="https://frost-lee.github.io/tags/Shadowsocks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A Memo for Time Series Analysis</title>
+    <link href="https://frost-lee.github.io/memo-time-series/"/>
+    <id>https://frost-lee.github.io/memo-time-series/</id>
+    <published>2020-01-15T03:29:22.000Z</published>
+    <updated>2021-05-01T05:10:16.934Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Time series analysis focus on the analysis of random variable sequences. In this article, I would briefly review the basic definitions and properties of time series, the typical models, and the prediction of time series. The concepts and formulas are from Applicational Time Series Analysis by Shuyuan He, published by Peking University Express.</summary>
+    
+    
+    
+    <category term="Mathematics" scheme="https://frost-lee.github.io/categories/Mathematics/"/>
+    
+    
+    <category term="Statistics" scheme="https://frost-lee.github.io/tags/Statistics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Capture Rectilinear RGBD Data with iPhone</title>
+    <link href="https://frost-lee.github.io/rgbd-iphone/"/>
+    <id>https://frost-lee.github.io/rgbd-iphone/</id>
+    <published>2019-11-08T15:02:38.000Z</published>
+    <updated>2021-01-31T12:03:03.744Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;A rectilinear RGBD image will help a lot in computer vision tasks, such as 3D reconstruction. This tutorial will illustrate how to capture RGBD data with iPhone, export the data to Python, and rectify the data.</summary>
+    
+    
+    
+    <category term="Software Developing" scheme="https://frost-lee.github.io/categories/Software-Developing/"/>
+    
+    
+    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
+    
+    <category term="iOS" scheme="https://frost-lee.github.io/tags/iOS/"/>
+    
+    <category term="Swift" scheme="https://frost-lee.github.io/tags/Swift/"/>
+    
+    <category term="C" scheme="https://frost-lee.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>离别的维也纳没有钢琴</title>
+    <link href="https://frost-lee.github.io/farewell-vienna/"/>
+    <id>https://frost-lee.github.io/farewell-vienna/</id>
+    <published>2019-10-19T08:02:32.000Z</published>
+    <updated>2020-07-16T16:31:07.384Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;交换学期的最后一场旅行：摩天轮，蛋糕，宫殿以及世界各国的朋友们似乎可以弥补没有到金色大厅的遗憾。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>敬冰冷宇宙中的意识光辉</title>
+    <link href="https://frost-lee.github.io/glory-of-consciousness/"/>
+    <id>https://frost-lee.github.io/glory-of-consciousness/</id>
+    <published>2019-09-28T16:03:58.000Z</published>
+    <updated>2020-07-16T16:31:07.386Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;To the glory of consciousness in the freezing universe.</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第五大道</title>
+    <link href="https://frost-lee.github.io/apple-new-york/"/>
+    <id>https://frost-lee.github.io/apple-new-york/</id>
+    <published>2019-09-21T05:51:37.000Z</published>
+    <updated>2020-07-16T16:31:07.381Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;和 Tim Cook 自拍，参与 Apple Fifth Avenue 的重新开业活动，购买 Apple Watch Series 5，在纽约街上躺着过夜，走过纽约的著名景点。24 小时中，发生了无数以前根本没有想过的疯狂的事情。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>布拉格的养老生活</title>
+    <link href="https://frost-lee.github.io/prague-life/"/>
+    <id>https://frost-lee.github.io/prague-life/</id>
+    <published>2019-08-27T10:47:37.000Z</published>
+    <updated>2020-07-16T16:31:07.391Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;旅行分两种，一种是马不停蹄打卡所有景点的硬核旅行，一种是每天睡懒觉好吃好喝的同时花一小部分时间随处走走逛逛的养老旅行。而我在布拉格的日子，应该算是后一种。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何推翻“所有自然数都可以唯一地用不超过23个汉字表达”的反证法证明</title>
+    <link href="https://frost-lee.github.io/how-overthrow-23-lemma/"/>
+    <id>https://frost-lee.github.io/how-overthrow-23-lemma/</id>
+    <published>2019-07-01T02:32:02.000Z</published>
+    <updated>2020-07-16T16:31:07.387Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;“所有自然数都可以唯一地用不超过 23 个汉字表达” 当然是个伪命题，但是，在一个段子中，它居然被用反证法证实了。证实这个问题的反证法肯定有问题，然而段子里面的反证法听起来太过合理以至于找不出漏洞。最终，我曾经花了坐火车的晚上的时间找出了反证法的漏洞，现在把这些内容整理在这里吧。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+    <category term="Paradox" scheme="https://frost-lee.github.io/tags/Paradox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Preprocessing Methods and Pipeline of Data Mining: An Overview</title>
+    <link href="https://frost-lee.github.io/preprocessing-pipeline-dm/"/>
+    <id>https://frost-lee.github.io/preprocessing-pipeline-dm/</id>
+    <published>2019-06-15T19:37:13.000Z</published>
+    <updated>2021-01-31T12:06:35.378Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;This is the course project of Seminar Data Mining (IN0014, IN4927) in Technical University of Munich. My topic described as &quot;Give a quick overview over the data mining pipeline and then focus on methods to preprocess data such that it can be successfully tackled by data mining methods.&quot;</summary>
+    
+    
+    
+    <category term="Data Analysis" scheme="https://frost-lee.github.io/categories/Data-Analysis/"/>
+    
+    
+    <category term="Paper" scheme="https://frost-lee.github.io/tags/Paper/"/>
+    
+    <category term="Course Project" scheme="https://frost-lee.github.io/tags/Course-Project/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>30 小时的苏黎世</title>
+    <link href="https://frost-lee.github.io/30-hour-zurich/"/>
+    <id>https://frost-lee.github.io/30-hour-zurich/</id>
+    <published>2019-05-23T16:34:00.000Z</published>
+    <updated>2020-07-16T16:31:07.380Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;借在欧洲交换之便，在 2019 年 5 月的一个周末开始一场仅仅 30 小时的，说走就 5 天以后走的苏黎世之旅。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Implementing Box-Cox Transformation for Linear Model</title>
+    <link href="https://frost-lee.github.io/box-cox-linear-model/"/>
+    <id>https://frost-lee.github.io/box-cox-linear-model/</id>
+    <published>2019-05-12T01:38:46.000Z</published>
+    <updated>2021-01-31T12:20:26.511Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and the area of it. But this does not necessarily mean the linear model is not suitable for them. By applying certain transformations, the model can still be optimized for more realistic problems.</summary>
+    
+    
+    
+    <category term="Mathematics" scheme="https://frost-lee.github.io/categories/Mathematics/"/>
+    
+    
+    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
+    
+    <category term="Statistics" scheme="https://frost-lee.github.io/tags/Statistics/"/>
+    
+    <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Predicting Human Age with the Length of Telomere</title>
+    <link href="https://frost-lee.github.io/length-telomere/"/>
+    <id>https://frost-lee.github.io/length-telomere/</id>
+    <published>2019-05-09T09:29:55.000Z</published>
+    <updated>2021-01-31T14:51:15.659Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;My friend Marcus Mao (I&#39;d call him &quot;Chairman Mao&quot;) is working on his research program on this topic, and I was honorably invited to do the data analysis part of his work. The data came from testing the length of telomere of cells from human hair. Obtaining the data can be tough and time consuming, but let&#39;s keep it simple and just focus on the data analysis itself.</summary>
+    
+    
+    
+    <category term="Data Analysis" scheme="https://frost-lee.github.io/categories/Data-Analysis/"/>
+    
+    
+    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
+    
+    <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tips for Developing a Swift Playground</title>
+    <link href="https://frost-lee.github.io/tip-playground/"/>
+    <id>https://frost-lee.github.io/tip-playground/</id>
+    <published>2019-03-30T14:28:21.000Z</published>
+    <updated>2021-01-31T15:03:07.364Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;If you have experience in iOS development with Swift, making a Swift Playground application would not be a tough job for you. However, there are still some differences between developing an iOS application and a Swift Playground application</summary>
+    
+    
+    
+    <category term="Software Developing" scheme="https://frost-lee.github.io/categories/Software-Developing/"/>
+    
+    
+    <category term="iOS" scheme="https://frost-lee.github.io/tags/iOS/"/>
+    
+    <category term="Swift" scheme="https://frost-lee.github.io/tags/Swift/"/>
+    
+    <category term="Swift Playground" scheme="https://frost-lee.github.io/tags/Swift-Playground/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>德国交换签证申请</title>
+    <link href="https://frost-lee.github.io/german-visa-application/"/>
+    <id>https://frost-lee.github.io/german-visa-application/</id>
+    <published>2019-02-02T15:52:29.000Z</published>
+    <updated>2020-07-16T16:31:07.385Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;我就读于浙江大学，在 2018 年 10 月左右申请了慕尼黑工业大学（Technische Universität München，TUM）的2019 年夏学期 TUM Exchange 项目，之后便是相应的准备工作，从在浙江大学和 TUM 的申请到留德人员审核（APS），最终在 2019 年 3 月 2 日最终收到签证，前前后后四个多月，特写此博客以记录。</summary>
+    
+    
+    
+    <category term="Others" scheme="https://frost-lee.github.io/categories/Others/"/>
+    
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Overseas" scheme="https://frost-lee.github.io/tags/Overseas/"/>
+    
+    <category term="Visa" scheme="https://frost-lee.github.io/tags/Visa/"/>
+    
+  </entry>
+  
+</feed>

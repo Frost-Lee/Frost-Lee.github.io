@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="dEKIskZSG1sj_B105kZnKupOw7mKVCXsSrXXim-FhqI">
+  <meta name="msvalidate.01" content="9896C95C563A05172CD78265E4243404">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"frost-lee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Time series analysis focus on the analysis of random variable sequences. In this article, I would briefly review the basic definitions and properties of time series, the typical models, and the predic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Memo for Time Series Analysis">
+<meta property="og:url" content="https://frost-lee.github.io/memo-time-series/index.html">
+<meta property="og:site_name" content="Frost&#39;s Blog">
+<meta property="og:description" content="Time series analysis focus on the analysis of random variable sequences. In this article, I would briefly review the basic definitions and properties of time series, the typical models, and the predic">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-01-15T03:29:22.000Z">
+<meta property="article:modified_time" content="2021-05-01T05:10:16.934Z">
+<meta property="article:author" content="Frost Lee">
+<meta property="article:tag" content="Statistics">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://frost-lee.github.io/memo-time-series/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>A Memo for Time Series Analysis | Frost's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139409052-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-139409052-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Frost's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Frost's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frost's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://frost-lee.github.io/memo-time-series/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.png">
+      <meta itemprop="name" content="Frost Lee">
+      <meta itemprop="description" content="Civilize the age.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frost's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Memo for Time Series Analysis
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-15 11:29:22" itemprop="dateCreated datePublished" datetime="2020-01-15T11:29:22+08:00">2020-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-01 13:10:16" itemprop="dateModified" datetime="2021-05-01T13:10:16+08:00">2021-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Time series analysis focus on the analysis of random variable sequences. In this article, I would briefly review the basic definitions and properties of time series, the typical models, and the prediction of time series. The concepts and formulas are from Applicational Time Series Analysis by Shuyuan He, published by Peking University Express.<a id="more"></a> Note that this is only a memo containing only key knowledge. If you are a beginner, please refer to other tutorials.</p>
+<blockquote>
+<p>I picked up most of my statistics knowledge in my university in Mandarin. Thus there might be slight mistakes or imperfections with the terms and the grammars in this article. If you have any suggestions, you are more than appreciated to <a href="mailto:%20contact.FrostLee@gmail.com" rel="external nofollow noreferrer">email me</a> and help me to correct them.</p>
+</blockquote>
+<h1 id="basic-definitions">Basic Definitions</h1>
+<p>In this section, the basic definition of time series related knowledges, including stationary time series, correlation function, white noise, and spectrum function, will be reviewed. Some useful properties of these definitions will be reviewed along with.</p>
+<h2 id="time-series">Time Series</h2>
+<p>A sequence of random variables ordered by time index is called a time series, represented as <span class="math display">\[
+X_1, X_2, \ \dots
+\]</span> For a time series, its observed samples are called an implementation of the time series, represented as <span class="math display">\[
+x_1, x_2, \ \dots
+\]</span> Most of the time, a time series is considered as the sum of 3 components: the trend component <span class="math inline">\(T_t\)</span>, the seasonal component <span class="math inline">\(S_t\)</span>, and the random component <span class="math inline">\(R_t\)</span>. <span class="math display">\[
+X_t = T_t + S_t + R_t
+\]</span> Usually, <span class="math inline">\(T_t\)</span> and <span class="math inline">\(S_t\)</span> are considered as non-random functions and can be estimated by methods such as regression. This article would mainly focus on the random component, <span class="math inline">\(R_t\)</span>.</p>
+<h2 id="stationary-time-series">Stationary Time Series</h2>
+<p>A time series <span class="math inline">\(\{X_t\}\)</span> is called a <strong>stationary time series</strong> if it satisfies the following.</p>
+<ul>
+<li>For any <span class="math inline">\(t \in \mathbb{N}\)</span>, <span class="math inline">\(EX_t^2 &lt; \infty\)</span></li>
+<li>For any <span class="math inline">\(t \in \mathbb{N}\)</span>, <span class="math inline">\(EX_t = \mu\)</span></li>
+<li>For any <span class="math inline">\(t \in \mathbb{N}\)</span>, <span class="math inline">\(E[(X_t - \mu)(X_s - \mu)] = \gamma_{t - s}\)</span></li>
+</ul>
+<p>That is, for a stationary time series, for every term, their second moment is finite, and the expectations are a fixed value. For every two terms, their correlation is decided by the difference of their time index instead of the time index itself.</p>
+<h2 id="correlation-function">Correlation Function</h2>
+<p>For a stationary time series <span class="math inline">\(\{X_t\}\)</span> with mean value <span class="math inline">\(\mu\)</span> and correlation defined by the following formula. <span class="math display">\[
+\gamma_{k} = E[(X_t - \mu)(X_{t + k} - \mu)]
+\]</span> The sequence <span class="math inline">\(\{\gamma_k\}\)</span> is called the <strong>correlation function</strong> of the stationary time series. And the correlation matrix <span class="math inline">\(\Gamma_n\)</span> is defined as follows. <span class="math display">\[
+\Gamma_n = (\gamma_{k - j})_{k, j = 1}^n = \left(\begin{matrix}
+    \gamma_0 &amp; \gamma_1 &amp; \dots &amp; \gamma_{n - 1} \\
+    \gamma_1 &amp; \gamma_0 &amp; \dots &amp; \gamma_{n - 2} \\
+    \vdots &amp; \vdots &amp; &amp; \vdots \\
+    \gamma_{n - 1} &amp; \gamma_{n - 2} &amp; \dots &amp; \gamma_0
+\end{matrix}\right)
+\]</span> The correlation function <span class="math inline">\(\{\gamma_k\}\)</span> and the correlation matrix <span class="math inline">\(\Gamma_n\)</span> satisfies the following properties.</p>
+<ul>
+<li><span class="math inline">\(\gamma_k = \gamma_{-k}\)</span></li>
+<li><span class="math inline">\(\Gamma_n\)</span> is non-negative definite for any <span class="math inline">\(n \in \mathbb{N}_+\)</span></li>
+<li><span class="math inline">\(|\gamma_k| \leq \gamma_0\)</span> for any <span class="math inline">\(k \in \mathbb{Z}\)</span></li>
+</ul>
+<h3 id="estimation-of-correlation-function">Estimation of Correlation Function</h3>
+<p>Given <span class="math inline">\(n\)</span> samples from a stationary time series, the correlation function can be estimated as follows. <span class="math display">\[
+\hat{\gamma}_k = \frac{1}{N} \sum_{j = 1}^{N - k} (x_j - \bar{x}_N)(x_{j + k} - \bar{x}_N)
+\]</span></p>
+<h2 id="partial-correlation-coefficient">Partial Correlation Coefficient</h2>
+<p>For stationary time series with positive definite <span class="math inline">\(\Gamma_{n + 1}\)</span>, for <span class="math inline">\(1 \leq k \leq n\)</span>, the Levinson recursive formula holds. <span class="math display">\[
+\begin{cases}
+a_{1, 1} = \frac{\gamma_1}{\gamma_0} \\
+\sigma_0^2 = \gamma_0 \\
+\sigma_k^2 = \sigma_{k - 1}^2 (1 - a_{k, k}^2) \\
+a_{k + 1, k + 1} = \frac{\gamma_{k + 1} - \sum_{j = 1}^k a_{k, j}\gamma_{k - j + 1}}{\gamma_0 - \sum_{j = 1}^k a_{k, j} \gamma_j} \\
+a_{k + 1, j} = a_{k, j} - a_{k + 1, k + 1} a_{k, k - j + 1}
+\end{cases}
+\]</span> with <span class="math display">\[
+\sigma_k^2 = E(X_{k + 1} - \textbf{a}_k^T\textbf{X}_k)^2 \\
+\textbf{X}_n = (X_n, X_{n - 1}, \dots, X_1)^T
+\]</span></p>
+<h2 id="white-noise">White Noise</h2>
+<p>Let <span class="math inline">\(\{\epsilon_t\}\)</span> be a stationary time series, if for any <span class="math inline">\(s, t \in \mathbb{N}\)</span>, <span class="math display">\[
+E\epsilon_t = \mu \\
+cov(\epsilon_t, \epsilon_s) = \begin{cases}
+    \sigma^2 \qquad t = s \\
+    0 \qquad \ \ t \neq s
+\end{cases}
+\]</span> Then <span class="math inline">\(\{\epsilon_t\}\)</span> is called <strong>white noise</strong>, usually represented as <span class="math inline">\(WN(\mu, \sigma^2)\)</span>.</p>
+<h3 id="white-noise-test">White Noise Test</h3>
+<p>Given the estimation of the correlation coefficient for samples from a time series <span class="math display">\[
+\hat{\rho}_k = \frac{\hat{\gamma}_k}{\hat{\gamma}_0}
+\]</span> The following random variable approximately obeys <span class="math inline">\(m\)</span>-dimensional normal distribution. <span class="math display">\[
+\sqrt{N} (\hat{\rho}_1, \hat{\rho}_2, \dots, \hat{\rho}_m)
+\]</span> Thus, the following random variable approximately obeys the chi-square distribution with the degree of freedom <span class="math inline">\(m\)</span>. <span class="math display">\[
+\chi_m^2 = N \sum_{i = 1}^m \hat{\rho}_i^2
+\]</span> By applying the chi-square test, it would be possible to decide whether the samples are from white noise.</p>
+<h2 id="spectrum-function">Spectrum Function</h2>
+<p>For stationary time series <span class="math inline">\(\{X_t\}\)</span> with correlation function <span class="math inline">\(\{\gamma_k\}\)</span>, if there exists a non-decreasing and right continuous function <span class="math inline">\(F(\lambda)\)</span> defined in <span class="math inline">\([-\pi, \pi]\)</span> such that: <span class="math display">\[
+\gamma_k = \int_{-\pi}^\pi e^{ik\lambda} d F(\lambda) \\
+F(- \pi) = 0
+\]</span> Then <span class="math inline">\(F(\lambda)\)</span> is called the <strong>spectrum distribution function</strong> for <span class="math inline">\(\{X_t\}\)</span>.</p>
+<p>If there exists a non-negative function <span class="math inline">\(f(\lambda)\)</span> such that: <span class="math display">\[
+\gamma_k = \int_{-\pi}^\pi f(\lambda) e^{ik\lambda} d\lambda
+\]</span> Then <span class="math inline">\(f(\lambda)\)</span> is called the <strong>spectrum density function</strong> for <span class="math inline">\(\{X_t\}\)</span>.</p>
+<p>For stationary time series, its spectrum function uniquely exists. The spectrum density function for real value stationary time series is an odd function.</p>
+<h3 id="spectrum-density-function-for-stationary-time-series">Spectrum Density Function for Stationary Time Series</h3>
+<p>If the correlation function <span class="math inline">\(\{\gamma_k\}\)</span> for stationary time series <span class="math inline">\(\{X_t\}\)</span> is absolute summable, then <span class="math inline">\(\{X_t\}\)</span> has its spectrum density function <span class="math display">\[
+f(\lambda) = \frac{1}{2 \pi} \sum_{k = - \infty}^\infty \gamma_k e^{-ik\lambda}
+\]</span></p>
+<h3 id="spectrum-density-function-for-moving-average">Spectrum Density Function for Moving Average</h3>
+<p>Let <span class="math inline">\(\{\epsilon_t\}\)</span> be a <span class="math inline">\(WN(0, \sigma_2)\)</span>, sequence <span class="math inline">\(\{a_j\}\)</span> are square summable, then the moving average over <span class="math inline">\(\{\epsilon_t\}\)</span> <span class="math display">\[
+X_t = \sum_{j = -\infty}^\infty a_j \epsilon_{t - j}
+\]</span> has spectrum density function <span class="math display">\[
+f(\lambda) = \frac{\sigma^2}{2 \pi} \left| \sum_{j = - \infty}^\infty a_j e_{ij\lambda} \right|^2
+\]</span></p>
+<h2 id="hilbert-space-for-stationary-time-series">Hilbert Space for Stationary Time Series</h2>
+<p>Let <span class="math inline">\(L^2(X)\)</span> be the set containing all limited linear combination of random variables from stationary time series <span class="math inline">\(\{X_t\}\)</span>: <span class="math display">\[
+L^2(X) = \left\{ \sum_{j = 1}^k a_j X(t_j) | a_j \in \mathbb{R}^n, t_j \in \mathbb{Z}, 1 \leq j \leq k, k \in \mathbb{N}_+ \right\}
+\]</span> Then <span class="math inline">\(L^2(X)\)</span> is a linear space. With the inner product for element <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> defined as <span class="math inline">\(E(XY)\)</span>, <span class="math inline">\(L^2(X)\)</span> is a complete inner product space, also called a <strong>Hilbert space</strong>.</p>
+<h1 id="time-series-models">Time Series Models</h1>
+<p>In this section, 3 typical time series models: AR, MA, and ARMA, and their related properties will be reviewed.</p>
+<h2 id="arp-model">AR(p) Model</h2>
+<p>Let <span class="math inline">\(\{\epsilon_t\}\)</span> be a <span class="math inline">\(WN(0, \sigma^2)\)</span>, and <span class="math inline">\(A(z)\)</span> be a polynomial that satisfies <span class="math display">\[
+A(z) = 1 - \sum_{i = 1}^p a_j z^j \neq 0, \qquad |z| \leq 1
+\]</span> the differential equation <span class="math display">\[
+X_t = \sum_{j = 1}^p a_j X_{t - j} + \epsilon_t
+\]</span> is called an auto regression model, or <span class="math inline">\(AR(p)\)</span> model. If a stationary time series satisfies the model, it is called an <span class="math inline">\(AR(p)\)</span> series.</p>
+<h3 id="stable-solution-of-arp-model">Stable Solution of AR(p) Model</h3>
+<p>For <span class="math inline">\(AR(p)\)</span> model, its only stable solution is defined as follows. Sequence <span class="math inline">\(\{\psi_j\}\)</span> is called the <strong>Wold coefficient</strong> of the time series. <span class="math display">\[
+X_t = A^{-1}(\mathscr B) \epsilon_t = \sum_{j = 0}^\infty \psi_j \epsilon_{t - j}
+\]</span> The Wold coefficient can be solved by the following recursive formula. <span class="math display">\[
+\psi_k = \begin{cases}
+0 \qquad \qquad \qquad k \leq 0 \\
+1 \qquad \qquad \qquad k = 0 \\
+\sum_{j = 1}^p a_j \psi_{k - j} \qquad k \geq 1
+\end{cases}
+\]</span></p>
+<h3 id="spectrum-density-function-of-arp-series">Spectrum Density Function of AR(p) Series</h3>
+<p>For <span class="math inline">\(AR(p)\)</span> series <span class="math inline">\(\{X_t\}\)</span>, its spectrum density function is <span class="math display">\[
+f(\lambda) = \frac{\sigma^2}{2 \pi} \left| \sum_{j = 0}^\infty \psi_j e^{ij\lambda}\right|^2 = \frac{\sigma^2}{2 \pi} \left| \frac{1}{A(e^{i\lambda})} \right|^2
+\]</span></p>
+<h3 id="yule-walker-equation">Yule-Walker Equation</h3>
+<p>For <span class="math inline">\(AR(p)\)</span> series, the following equation holds. <span class="math display">\[
+\begin{cases}
+\boldsymbol{\gamma}_n = \Gamma_n \boldsymbol{a}_n \\
+\gamma_0 = \boldsymbol{\gamma}_n^T \boldsymbol{a}_n + \sigma^2
+\end{cases}
+\]</span> with <span class="math display">\[
+\boldsymbol{a}_n = (a_1, a_2, \dots, a_p, 0, \dots, 0)^T \\
+\boldsymbol{\gamma}_n = (\gamma_1, \gamma_2, \dots, \gamma_n)^T
+\]</span> Yule-Walker equation can be used to calculate the correlation function given <span class="math inline">\(\boldsymbol{a}_n\)</span>, or estimate <span class="math inline">\(\boldsymbol{a}_n\)</span> given estimated correlation function.</p>
+<h2 id="maq-model">MA(q) Model</h2>
+<p>Let <span class="math inline">\(\{\epsilon_t\}\)</span> be a <span class="math inline">\(WN(0, \sigma^2)\)</span>, and <span class="math inline">\(B(z)\)</span> be a polynomial that satisfies <span class="math display">\[
+B(z) = 1 + \sum_{j = 1}^q b_j z^j, \qquad |z| &lt; 1
+\]</span> the equation <span class="math display">\[
+X_t = \epsilon_t + \sum_{j = 1}^q b_j \epsilon_{t - j}
+\]</span> is called a moving average model, or <span class="math inline">\(MA(q)\)</span> model. If a stationary time series satisfies the model, it is called a <span class="math inline">\(MA(q)\)</span> series.</p>
+<h3 id="correlation-function-for-maq-series">Correlation Function for MA(q) Series</h3>
+<p>Given a <span class="math inline">\(MA(q)\)</span> series, its correlation function <span class="math inline">\(\{\gamma_k\}\)</span> can be calculated as follows. <span class="math display">\[
+\gamma_k = \begin{cases}
+\sigma^2 \sum_{j = 0}^{q - k} b_j b_{j + k}, \qquad 0 \leq k \leq q \\
+0, \qquad k &gt; q
+\end{cases}
+\]</span></p>
+<h3 id="spectrum-density-function-for-maq-series">Spectrum Density Function for MA(q) Series</h3>
+<p>Given a <span class="math inline">\(MA(q)\)</span> series, its spectrum density function <span class="math inline">\(f(\lambda)\)</span> can be calculated as follows. <span class="math display">\[
+f(\lambda) = \frac{\sigma^2}{2 \pi} \left| \sum_{j = 0}^\infty \psi_j e^{ij\lambda}\right|^2 = \frac{1}{2 \pi} \sum_{k = -q}^q \gamma_k e^{-ik\lambda} = \frac{\sigma^2}{2 \pi} \left| B(e^{i\lambda}) \right|^2
+\]</span></p>
+<h2 id="armap-q-model">ARMA(p, q) Model</h2>
+<p>Let <span class="math inline">\(\{\epsilon_t\}\)</span> be a <span class="math inline">\(WN(0, \sigma^2)\)</span>, and <span class="math inline">\(A(z)\)</span> <span class="math inline">\(B(z)\)</span> be polynomials having different roots, <span class="math inline">\(b_0 = 1\)</span>, <span class="math inline">\(a_qb_q \neq 0\)</span>, and <span class="math display">\[
+A(z) = 1 - \sum_{i = 1}^p a_j z^j \neq 0, \qquad |z| \leq 1 \\
+B(z) = \sum_{j = 0}^q b_j z^j, \qquad |z| &lt; 1
+\]</span> the differential equation <span class="math display">\[
+X_t = \sum_{j = 1}^p a_j X_{t - j} + \sum_{j = 0}^q b_j \epsilon_{t - j}
+\]</span> is called an auto regression moving average model, or an <span class="math inline">\(ARMA(p, q)\)</span> model. If a stationary time series satisfies the model, it is called an <span class="math inline">\(ARMA(p, q)\)</span> series.</p>
+<h3 id="stable-solution-of-armap-q-model">Stable Solution of ARMA(p, q) Model</h3>
+<p>For <span class="math inline">\(ARMA(p, q)\)</span> model, its only stable solution is defined as follows. Sequence <span class="math inline">\(\{\psi_j\}\)</span> is called the <strong>Wold coefficient</strong> of the time series. <span class="math display">\[
+X_t = A^{-1}(\mathscr B) B(\mathscr B) \epsilon_t = \Phi(\mathscr B) \epsilon_t = \sum_{j = 0}^{\infty} \psi_j \epsilon_{t - j}
+\]</span> The Wold coefficient can be solved by the following recursive formula. <span class="math display">\[
+\psi_k = \begin{cases}
+0 \qquad \qquad \qquad k \leq 0 \\
+1 \qquad \qquad \qquad k = 0 \\
+b_j + \sum_{j = 1}^p a_j \psi_{k - j} \qquad k \geq 1
+\end{cases}
+\]</span></p>
+<h3 id="correlation-function-for-maq-series-1">Correlation Function for MA(q) Series</h3>
+<p>Given an <span class="math inline">\(ARMA(p, q)\)</span> series, its correlation function <span class="math inline">\(\{\gamma_k\}\)</span> can be calculated as follows. <span class="math display">\[
+\gamma_k = \sigma^2 \sum_{j = 0}^\infty \psi_j \psi_{j + k} = \sum_{j = 1}^p a_j \gamma_{k - j} + \sigma^2 \sum_{j = 0}^q b_j \psi_{j - k}
+\]</span></p>
+<h3 id="spectrum-density-function-for-maq-series-1">Spectrum Density Function for MA(q) Series</h3>
+<p>Given an <span class="math inline">\(ARMA(p, q)\)</span> series, its spectrum density function <span class="math inline">\(f(\lambda)\)</span> can be calculated as follows. <span class="math display">\[
+f(\lambda) = \frac{\sigma^2}{2 \pi} \left| \sum_{j = 0}^\infty \psi_j e^{ij\lambda}\right|^2 = \frac{1}{2 \pi} \sum_{k = -q}^q \gamma_k e^{-ik\lambda} = \frac{\sigma^2}{2 \pi} \left| \frac{B(e^{i\lambda})}{A(e^{i\lambda})} \right|^2
+\]</span></p>
+<h1 id="time-series-prediction">Time Series Prediction</h1>
+<p>One goal of analyzing time series is to make better a prediction for its futural terms. Since a time series can be considered as the sum of a trend component, a seasonal component, and a random component, and the random component is usually stationary, this section mainly focuses on the prediction for stationary time series.</p>
+<h2 id="linear-prediction-for-time-series">Linear Prediction for Time Series</h2>
+<p>Let <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_j\)</span> be random variables with <span class="math inline">\(0\)</span> as their mean value and limited variance, if there exist <span class="math inline">\(\boldsymbol{a} \in \mathbb{R}^n\)</span>, such that for any <span class="math inline">\(\boldsymbol{b} \in \mathbb{R}^n\)</span>, <span class="math display">\[
+E(Y - \boldsymbol{a}^T X)^2 \leq E(Y - \boldsymbol{b}^T X)^2
+\]</span> then <span class="math inline">\(\boldsymbol{a}^T \boldsymbol{X}\)</span> is called the <strong>best linear prediction</strong> for <span class="math inline">\(Y\)</span> by <span class="math inline">\(\boldsymbol{X}\)</span>, represented as <span class="math inline">\(L(Y | \boldsymbol{X})\)</span>.</p>
+<h3 id="mean-square-error-for-best-linear-prediction">Mean Square Error for Best Linear Prediction</h3>
+<p>If <span class="math inline">\(\boldsymbol{a} \in \mathbb{R}^n\)</span>, such that <span class="math display">\[
+\Gamma \boldsymbol{a} = E(\boldsymbol{X}Y)
+\]</span> then the following equations holds. <span class="math display">\[
+L(Y | \boldsymbol{X}) = \boldsymbol{a}^T \boldsymbol{X} \\
+E(Y - L(Y | \boldsymbol{X}))^2 = EY^2 - E[L(Y | \boldsymbol{X})]^2 = EY^2 - \boldsymbol{a}^T \Gamma \boldsymbol{a}
+\]</span></p>
+<h2 id="stepwise-prediction-for-time-series">Stepwise Prediction for Time Series</h2>
+<p>Let <span class="math inline">\(\{Y_t\}\)</span> be a stationary time series with mean value <span class="math inline">\(0\)</span>. If its correlation matrix is positive definite, then the best linear prediction can be derived from the prediction errors: <span class="math display">\[
+\hat{Y}_{n + 1} = L(Y_{n + 1} | \boldsymbol{Y_n}) = \sum_{j = 1}^n \theta_{n, j} W_{n + 1 - j}
+\]</span> The coefficients <span class="math inline">\(\{\theta_{n, j}\}\)</span> and the prediction square error <span class="math inline">\(\nu_n = EW_{n + 1}^2\)</span> satisfies the following recursive formula. <span class="math display">\[
+\begin{cases}
+\nu_0 = \gamma_0 \\
+\theta_{n, n - k} = \left[ \gamma_{n - k} - \sum_{j = 0}^{k - 1} \frac{\theta_{k, k - j} \theta_{n, n - j} \nu_j}{\nu_k} \right] \\
+\nu_n = \gamma_0 - \sum_{j = 0}^{n - 1} \theta_{n, n - j}^2 \nu_j
+\end{cases}
+\]</span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Statistics/" rel="tag"># Statistics</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/rgbd-iphone/" rel="prev" title="Capture Rectilinear RGBD Data with iPhone">
+      <i class="fa fa-chevron-left"></i> Capture Rectilinear RGBD Data with iPhone
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/shadowsocks-ubuntu/" rel="next" title="Setting Up Shadowsocks Service on an Ubuntu Server">
+      Setting Up Shadowsocks Service on an Ubuntu Server <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#basic-definitions"><span class="nav-number">1.</span> <span class="nav-text">Basic Definitions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#time-series"><span class="nav-number">1.1.</span> <span class="nav-text">Time Series</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stationary-time-series"><span class="nav-number">1.2.</span> <span class="nav-text">Stationary Time Series</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#correlation-function"><span class="nav-number">1.3.</span> <span class="nav-text">Correlation Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#estimation-of-correlation-function"><span class="nav-number">1.3.1.</span> <span class="nav-text">Estimation of Correlation Function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial-correlation-coefficient"><span class="nav-number">1.4.</span> <span class="nav-text">Partial Correlation Coefficient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#white-noise"><span class="nav-number">1.5.</span> <span class="nav-text">White Noise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#white-noise-test"><span class="nav-number">1.5.1.</span> <span class="nav-text">White Noise Test</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spectrum-function"><span class="nav-number">1.6.</span> <span class="nav-text">Spectrum Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spectrum-density-function-for-stationary-time-series"><span class="nav-number">1.6.1.</span> <span class="nav-text">Spectrum Density Function for Stationary Time Series</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectrum-density-function-for-moving-average"><span class="nav-number">1.6.2.</span> <span class="nav-text">Spectrum Density Function for Moving Average</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hilbert-space-for-stationary-time-series"><span class="nav-number">1.7.</span> <span class="nav-text">Hilbert Space for Stationary Time Series</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time-series-models"><span class="nav-number">2.</span> <span class="nav-text">Time Series Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#arp-model"><span class="nav-number">2.1.</span> <span class="nav-text">AR(p) Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stable-solution-of-arp-model"><span class="nav-number">2.1.1.</span> <span class="nav-text">Stable Solution of AR(p) Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectrum-density-function-of-arp-series"><span class="nav-number">2.1.2.</span> <span class="nav-text">Spectrum Density Function of AR(p) Series</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yule-walker-equation"><span class="nav-number">2.1.3.</span> <span class="nav-text">Yule-Walker Equation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maq-model"><span class="nav-number">2.2.</span> <span class="nav-text">MA(q) Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#correlation-function-for-maq-series"><span class="nav-number">2.2.1.</span> <span class="nav-text">Correlation Function for MA(q) Series</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectrum-density-function-for-maq-series"><span class="nav-number">2.2.2.</span> <span class="nav-text">Spectrum Density Function for MA(q) Series</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#armap-q-model"><span class="nav-number">2.3.</span> <span class="nav-text">ARMA(p, q) Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stable-solution-of-armap-q-model"><span class="nav-number">2.3.1.</span> <span class="nav-text">Stable Solution of ARMA(p, q) Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#correlation-function-for-maq-series-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">Correlation Function for MA(q) Series</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spectrum-density-function-for-maq-series-1"><span class="nav-number">2.3.3.</span> <span class="nav-text">Spectrum Density Function for MA(q) Series</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time-series-prediction"><span class="nav-number">3.</span> <span class="nav-text">Time Series Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linear-prediction-for-time-series"><span class="nav-number">3.1.</span> <span class="nav-text">Linear Prediction for Time Series</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mean-square-error-for-best-linear-prediction"><span class="nav-number">3.1.1.</span> <span class="nav-text">Mean Square Error for Best Linear Prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stepwise-prediction-for-time-series"><span class="nav-number">3.2.</span> <span class="nav-text">Stepwise Prediction for Time Series</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Frost Lee"
+      src="/images/Avatar.png">
+  <p class="site-author-name" itemprop="name">Frost Lee</p>
+  <div class="site-description" itemprop="description">Civilize the age.</div>
+</div>
+
+
+   <div class="feed-link motion-element">
+     <a href="/atom.xml" rel="alternate">
+       <i class="fa fa-rss"></i>
+       RSS
+     </a>
+   </div>
+ 
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Frost-Lee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Frost-Lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10068755/frost-lee" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10068755&#x2F;frost-lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact.FrostLee@gmail.com" title="E-Mail → mailto:contact.FrostLee@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frost Lee</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '13c40b3687a06d2c9a84',
+      clientSecret: '3ce983fcf815d6ee689b8e00d1bec23a7973c396',
+      repo        : 'Frost-Lee.github.io',
+      owner       : 'Frost-Lee',
+      admin       : ['Frost-Lee'],
+      id          : '/memo-time-series/',
+        language: 'en',
+      distractionFreeMode: true,
+      proxy: 'http://209.250.236.3:8080/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

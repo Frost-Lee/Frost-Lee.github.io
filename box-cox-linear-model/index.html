@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="dEKIskZSG1sj_B105kZnKupOw7mKVCXsSrXXim-FhqI">
+  <meta name="msvalidate.01" content="9896C95C563A05172CD78265E4243404">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"frost-lee.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Implementing Box-Cox Transformation for Linear Model">
+<meta property="og:url" content="https://frost-lee.github.io/box-cox-linear-model/index.html">
+<meta property="og:site_name" content="Frost&#39;s Blog">
+<meta property="og:description" content="The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and th">
+<meta property="og:locale">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/pf88bgTt9uhhZo7YD6Dcuj.jpeg">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/37DcH4cD4YqK2NhVAwJXZN.jpeg">
+<meta property="article:published_time" content="2019-05-12T01:38:46.000Z">
+<meta property="article:modified_time" content="2021-01-31T12:20:26.511Z">
+<meta property="article:author" content="Frost Lee">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Statistics">
+<meta property="article:tag" content="Regression Model">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg">
+
+<link rel="canonical" href="https://frost-lee.github.io/box-cox-linear-model/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Implementing Box-Cox Transformation for Linear Model | Frost's Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139409052-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-139409052-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Frost's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Frost's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Frost's Blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://frost-lee.github.io/box-cox-linear-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Avatar.png">
+      <meta itemprop="name" content="Frost Lee">
+      <meta itemprop="description" content="Civilize the age.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frost's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Implementing Box-Cox Transformation for Linear Model
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-12 09:38:46" itemprop="dateCreated datePublished" datetime="2019-05-12T09:38:46+08:00">2019-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-31 20:20:26" itemprop="dateModified" datetime="2021-01-31T20:20:26+08:00">2021-01-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and the area of it. But this does not necessarily mean the linear model is not suitable for them. By applying certain transformations, the model can still be optimized for more realistic problems.<a id="more"></a> Box-cox transformation a group of transformations, which can be represented as <span class="math inline">\(\eqref{box-cox}\)</span>. <span class="math display">\[
+\begin{equation}
+y^{(\lambda)} = 
+\begin{cases}
+\frac{y^\lambda - 1}{\lambda}, \qquad \lambda \neq 0 \\
+\ln y, \qquad \lambda = 0
+\end{cases}
+\end{equation}\label{box-cox}
+\]</span> By choosing the best <span class="math inline">\(\lambda\)</span>, the model can be optimized. For the diameter and area case, just apply the transformation with <span class="math inline">\(\lambda = \frac{1}{2}\)</span> to area observations, and the relationship between labels and features would be linear.</p>
+<p>Note that box-cox transformation is just a transformation instead of a specific tool to fine-tune the linear models. It can also be used for normalizing data so that it is more likely to conform to normal distribution (<code>boxcox</code> in <code>scipy.stats</code> does exactly this if the <code>lmbda</code> parameter is not given).</p>
+<h1 id="representation-of-linear-model">Representation of Linear Model</h1>
+<p>I suppose "linear model" is already a household name, but in order to avoid unnecessary misunderstanding, I would still give the representation of the linear model.</p>
+<h2 id="one-dimensional-case">One-Dimensional Case</h2>
+<p>Let's consider the 1-dimensional case: let <span class="math inline">\(x\)</span> be the feature variable, and <span class="math inline">\(y\)</span> be the label, the linear model can be represented as <span class="math inline">\(\eqref{1d-lm}\)</span>. <span class="math display">\[
+\begin{equation}
+y = \beta x + c + e
+\end{equation}\label{1d-lm}
+\]</span> Where <span class="math inline">\(\beta\)</span> represents the slope, and <span class="math inline">\(c\)</span> represents the bias. We assume <span class="math inline">\(e \sim N(0, \sigma^2)\)</span>.</p>
+<h2 id="multi-dimensional-case">Multi-Dimensional Case</h2>
+<p>As for the multi-dimensional case, say, the feature <span class="math inline">\(\textbf{x}\)</span> consists of multiple fields, we can still apply the linear model, as <span class="math inline">\(\eqref{md-lm}\)</span>. <span class="math display">\[
+\begin{equation}
+y = \beta \textbf{x} + c + e
+\end{equation}\label{md-lm}
+\]</span> Suppose this is a <span class="math inline">\(p\)</span> dimensional linear model, we represent <span class="math inline">\(\textbf{x}\)</span> and <span class="math inline">\(\beta\)</span> as follows: <span class="math display">\[
+\textbf{x} = \left( x_1, x_2, \dots, x_p \right)^T \\
+\beta = \left(\beta_1, \beta_2, \dots, \beta_p\right)^T
+\]</span> By attaching a <span class="math inline">\(1\)</span> in front of vector <span class="math inline">\(\textbf{x}\)</span>, the bias term <span class="math inline">\(c\)</span> can be intergrated into the term <span class="math inline">\(\beta \textbf{x}\)</span>, and now <span class="math inline">\(\textbf{x}\)</span> and <span class="math inline">\(\beta\)</span> should look like this: <span class="math display">\[
+\textbf{x} = \left(1, x_1, x_2, \dots, x_p \right)^T \\
+\beta = \left(\beta_0, \beta_1, \beta_2, \dots, \beta_p\right)^T
+\]</span> Now our linear model is more simplified, as <span class="math inline">\(\eqref{smd-lm}\)</span>. <span class="math display">\[
+\begin{equation}
+y = \beta^T \textbf{x} + e
+\end{equation}\label{smd-lm}
+\]</span></p>
+<h2 id="model-for-training-set">Model for Training Set</h2>
+<p>Only a model is definitely not enough for prediction. The training set, a set of feature and label pairs, represented as <span class="math inline">\(\left\{ \textbf{x}_i, y_i \right\}_1^N\)</span>, should be provided to train the model. Theoretically, each pair can be represented as our model approximately, for <span class="math inline">\(i\)</span> th pair, it is <span class="math inline">\(y_i = \beta \textbf{x}_i + e_i\)</span>. If we write them together, we get the vector representation of the linear model over the whole training set, as <span class="math inline">\(\eqref{t-lm}\)</span>. <span class="math display">\[
+\begin{equation}
+\textbf{y} = \textbf{X} \beta + \textbf{e}
+\end{equation}\label{t-lm}
+\]</span> Where <span class="math inline">\(\textbf{y}\)</span> and <span class="math inline">\(\textbf{x}\)</span> are represented as follows: <span class="math display">\[
+\textbf{y} = \left(y_1, y_2, \dots, y_N\right)^T \\
+\textbf{X} = \left(\begin{matrix}
+   1 &amp; \textbf{x}_1^T \\
+   1 &amp; \textbf{x}_2^T \\
+   \vdots &amp; \vdots \\
+   1 &amp; \textbf{x}_N^T
+  \end{matrix}\right)
+\]</span> According to the assumption of linear model, for each <span class="math inline">\(i\)</span>, <span class="math inline">\(e_i \sim N(0, \sigma^2)\)</span>, and <span class="math inline">\(e_i\)</span> and <span class="math inline">\(e_j\)</span> are independent if <span class="math inline">\(i \neq j\)</span>. Thus, <span class="math inline">\(\textbf{e}\)</span> should conform to <span class="math inline">\(p\)</span>-dimensional normal distribution, represented as <span class="math inline">\(\textbf{e} \sim N(0, \sigma^2I)\)</span>, where <span class="math inline">\(I\)</span> stands for the identity matrix.</p>
+<h1 id="finding-the-best-lambda">Finding the Best <span class="math inline">\(\lambda\)</span></h1>
+<p>Box-cox transformation is a group of transformations, if <span class="math inline">\(\lambda\)</span> is different, the transformation is different. So what is the best transformation to find-tune the linear model? The maximum likelihood would be a good choice to obtain the optimal <span class="math inline">\(\lambda\)</span>, that is, maximizing the probability of the training set to appear. The density function of <span class="math inline">\(p\)</span>-dimensional normal distribution <span class="math inline">\(N(\mu, \Sigma)\)</span> is as <span class="math inline">\(\eqref{pn_den}\)</span>. <span class="math display">\[
+\begin{equation}
+f(\textbf{x}) = \frac{1}{\left( 2\pi \right)^{\frac{n}{2}}\left|\Sigma\right|^{\frac{1}{2}}}\exp\{-\frac{1}{2}\left( \textbf{x} - \mu \right)^T \Sigma^{-1} \left( \textbf{x} - \mu \right)\}
+\end{equation}\label{pn_den}
+\]</span> By considering <span class="math inline">\(\eqref{t-lm}\)</span>, <span class="math inline">\(\textbf{y} ^{(\lambda)} =\textbf{X}\beta^T + \textbf{e} \sim N(\textbf{X}\beta^T, \sigma^2I)\)</span>, thus, the probability of the training set to appear, say, the likelihood of the training set can be represented with the density function, as <span class="math inline">\(\eqref{lkhd}\)</span>. <span class="math display">\[
+\begin{equation}
+f(\textbf{y}^{(\lambda)}) = L(\beta, \sigma) = \frac{1}{\left(\sqrt{2\pi} \sigma\right)^n}\exp\{-\frac{1}{2\sigma^2}\left( \textbf{y}^{(\lambda)} - \textbf{X}\beta \right)^T \left( \textbf{y}^{(\lambda)} - \textbf{X}\beta \right)\} J
+\end{equation}\label{lkhd}
+\]</span></p>
+<p>In <span class="math inline">\(\eqref{lkhd}\)</span>, <span class="math inline">\(J\)</span> stands for the Jacobi determinant of the transformation. This is required since <span class="math inline">\(\textbf{y}\)</span> is transformed. In brief, there should be a Jacobi determinant multiplied in the probability density function to compensate, for the transformation may distort the original distribution, make the distribution become 'unbalanced' over all real number values. For a transformation <span class="math inline">\((y_1, y_2, \dots , y_m) = f(x_1, x_2, \dots, x_n)\)</span>, its Jacobi determinant is as <span class="math inline">\(\eqref{jacobi}\)</span> . <span class="math display">\[
+\begin{equation}
+J = 
+\begin{vmatrix}
+\frac{\partial y_1}{\partial x_1} &amp; \dots &amp; \frac{\partial y_1}{\partial x_n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial y_m}{\partial x_1} &amp; \dots &amp; \frac{\partial y_m}{\partial x_n}
+\end{vmatrix}
+\end{equation}\label{jacobi}
+\]</span> Because in box-cox transformation, <span class="math inline">\(y_i^{(\lambda)} = f(y_i)\)</span>, the Jacobi determinant is diagonal, for <span class="math inline">\(y_i^{(\lambda)}\)</span> is not related with <span class="math inline">\(y_j\)</span> if <span class="math inline">\(i \neq j\)</span>, causing <span class="math inline">\(\frac{\partial y_i}{\partial y_j} = 0\)</span>. Thus the Jacobi determinant for box-cox transformation is as <span class="math inline">\(\eqref{bc_jacobi}\)</span>. <span class="math display">\[
+\begin{equation}
+J = 
+\begin{vmatrix}
+y_1^{\lambda - 1} &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; y_2^{\lambda - 1} &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \dots &amp; y_p^{\lambda - 1}
+\end{vmatrix}
+= \prod_{i=1}^{n} y_i^{\lambda - 1}
+\end{equation}\label{bc_jacobi}
+\]</span></p>
+<p>To obtain the maximum value of <span class="math inline">\(L(\beta, \sigma)\)</span>, the partial derivative of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> should be set to 0, as shown in <span class="math inline">\(\eqref{partial_zero}\)</span>. <span class="math display">\[
+\begin{equation}
+\begin{cases}
+\frac{\partial L}{\partial \beta} = \frac{J}{\left(\sqrt{2\pi}\sigma\right)^n}E \left( 2\textbf{X}^T \textbf{X} \beta - 2\textbf{X}^T \textbf{y}^{(\lambda)} \right) = 0 \\
+\frac{\partial L}{\partial \sigma} = J E \frac{- \sqrt{2\pi} n  + \sqrt{2\pi} \sigma^{-2} \left( \textbf{y} - \textbf{X}\beta \right)^T \left( \textbf{y} - \textbf{X}\beta \right)}{\left( \sqrt{2\pi} \sigma \right)^{n + 1}}  = 0
+\end{cases} \\
+E = \exp \{ -\frac{1}{2 \sigma^2} \left( \textbf{y}^{(\lambda)} - \textbf{X}\beta \right)^T \left(\textbf{y}^{(\lambda)} - \textbf{X}\beta \right) \}
+\end{equation}\label{partial_zero}
+\]</span> By removing the redundant terms in the multiplication, <span class="math inline">\(\eqref{partial_zero}\)</span> can be simplified to <span class="math inline">\(\eqref{simplified}\)</span>. <span class="math display">\[
+\begin{equation}
+\begin{cases}
+\textbf{X}^T \textbf{X} \beta - \textbf{X}^T \textbf{y}^{(\lambda)} = 0 \\
+- n + \sigma^{-2}\left( \textbf{y} - \textbf{X}\beta \right)^T \left( \textbf{y} - \textbf{X}\beta \right)  = 0
+\end{cases} 
+\end{equation}\label{simplified}
+\]</span> By solving the equation in <span class="math inline">\(\eqref{simplified}\)</span>, the value of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> when the maximum value of the likelihood function is reached can be got, given as in <span class="math inline">\(\eqref{max_par}\)</span>. <span class="math display">\[
+\begin{equation}
+\begin{cases}
+\beta = \left(\textbf{X}^T \textbf{X} \right)^{-1} \textbf{X}^T \textbf{y}^{(\lambda)} \\
+\sigma^2 = \frac{1}{n} \textbf{y}^{(\lambda)T} \left( \textbf{I} - \textbf{X}\left(\textbf{X}^T \textbf{X} \right)^{-1} \textbf{X}^T \right) \textbf{y}^{(\lambda)}
+\end{cases}
+\end{equation}\label{max_par}
+\]</span> Note that the following equation holds, which could simplify our following computation dramatically. <span class="math display">\[
+\begin{split}
+\left( \textbf{y}^{(\lambda)} - \textbf{X}\beta \right)^T \left( \textbf{y}^{(\lambda)} - \textbf{X}\beta \right)
+&amp; = \textbf{y}^{(\lambda)T} \left( \textbf{I} - \textbf{X}\left(\textbf{X}^T \textbf{X} \right)^{-1} \textbf{X}^T \right) \textbf{y}^{(\lambda)} \\
+&amp; = n \sigma^2
+\end{split}
+\]</span> By substituting <span class="math inline">\(\eqref{max_par}\)</span> into <span class="math inline">\(\eqref{lkhd}\)</span>, the maximum value of the likelihood function is given in <span class="math inline">\(\eqref{max_ml}\)</span> <span class="math display">\[
+\begin{equation}
+L(\beta, \sigma) = (2 \pi e)^{-\frac{n}{2}} J \left( \frac{\textbf{y}^{(\lambda)T} \left( \textbf{I} - \textbf{X}\left(\textbf{X}^T \textbf{X} \right)^{-1} \textbf{X}^T \right) \textbf{y}^{(\lambda)}}{n} \right)^{-\frac{n}{2}}
+\end{equation}\label{max_ml}
+\]</span></p>
+<p>To estimate the <span class="math inline">\(\lambda\)</span> that maximizes <span class="math inline">\(L(\beta, \sigma)\)</span>, it is okay to remove the multiply terms that do not involve <span class="math inline">\(\lambda\)</span>, so that the equation will be more simplified. After the removal, the logarithm likelihood should be as in <span class="math inline">\(\eqref{final_ml}\)</span>. <span class="math display">\[
+\begin{equation}
+\ln L(\beta, \sigma) = -\frac{n}{2} \ln \left( \textbf{y}^{(\lambda)T} \left( \textbf{I} - \textbf{X}\left(\textbf{X}^T \textbf{X} \right)^{-1} \textbf{X}^T \right) \textbf{y}^{(\lambda)} \right) + \ln J
+\end{equation}\label{final_ml}
+\]</span> Though deriving the precise <span class="math inline">\(\lambda\)</span> that minimize <span class="math inline">\(\eqref{final_ml}\)</span> is hard, this is a single variate optimizing problem. By probing different <span class="math inline">\(\lambda\)</span> in a certain range and plot the curve of <span class="math inline">\(\eqref{final_ml}\)</span>, an estimation of <span class="math inline">\(\lambda\)</span> is not hard to get.</p>
+<h1 id="python-implementation">Python Implementation</h1>
+<p>In this section, Python will be used to implement the procedure for deriving <span class="math inline">\(\lambda\)</span> used in the box-cox transformation. The basic concept of this program is to select a certain number of probes of <span class="math inline">\(\lambda\)</span> in a certain range, calculate the corresponding logarithm likelihood according to <span class="math inline">\(\eqref{final_ml}\)</span>, then give the <span class="math inline">\(\lambda\)</span> which have the maximum likelihood.</p>
+<h2 id="implementation">Implementation</h2>
+<p>To simplify the calculation for transformed <span class="math inline">\(\textbf{y}\)</span>, known as <span class="math inline">\(\textbf{y}^{(\lambda)}\)</span>, the method <code>scipy.stats.boxcox</code> is directly called, and <span class="math inline">\(\lambda\)</span> can be specified by assigning its argument <code>lmbda</code>.</p>
+<p>Suppose <span class="math inline">\(\textbf{X}\)</span> is and <span class="math inline">\(\textbf{y}\)</span> are both 2-dimensional numpy array with shape <span class="math inline">\(n\)</span> by <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span> by <span class="math inline">\(1\)</span>, the following code can calculate the logarithm likelihood presented in <span class="math inline">\(\eqref{final_ml}\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">log_likelihood</span>(<span class="params">lmbda, x, y</span>):</span></span><br><span class="line">    n, p = x.shape</span><br><span class="line">    lnjacobi = (lmbda - <span class="number">1</span>) * np.<span class="built_in">sum</span>(np.log(y))</span><br><span class="line">    trans_y = scipy.stats.boxcox(y, lmbda=lmbda)</span><br><span class="line">    xtxinv = np.linalg.inv(np.matmul(np.transpose(x), x))</span><br><span class="line">    imxxtxinvxt = np.subtract(np.identity(n), np.matmul(np.matmul(x, xtxinv), np.transpose(x)))</span><br><span class="line">    rss = np.matmul(np.matmul(np.transpose(trans_y), imxxtxinvxt), trans_y)</span><br><span class="line">    <span class="keyword">return</span> - n / <span class="number">2.0</span> * np.ndarray.flatten(np.log(rss)) + lnjacobi</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Note</strong>: <code>scipy.stats.boxcox</code> requires its argument data to be positive. This can be achieved by adding the minimum negative element <span class="math inline">\(x\_{ij}\)</span> to all elements in its row for all rows. After the prediction, simply subtract the corresponding row by <span class="math inline">\(x\_{ij}\)</span>.</p>
+</blockquote>
+<p>Suppose we need to obtain the potential <span class="math inline">\(\lambda\)</span> from <code>a</code> to <code>b</code> for <code>t</code> probes (represented as <code>potential_lmbdas</code>), obtaining the <span class="math inline">\(\lambda\)</span> with maximum likelihood is done as follows. This snippet will calculate the best estimated <span class="math inline">\(\lambda\)</span>, as well as plot a graph of likelihood with respect to</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">potential_lmbdas = np.linspace(a, b, t)</span><br><span class="line">likelihoods = np.array([log_likelihood(lmbda, x, y) <span class="keyword">for</span> lmbda <span class="keyword">in</span> potential_lmbdas])</span><br><span class="line">plt.plot(potential_lmbdas, likelihoods)</span><br><span class="line">print(<span class="string">&#x27;Estimation for lambda:&#x27;</span>, potential_lmbdas[np.argmax(likelihoods)])</span><br></pre></td></tr></table></figure>
+<h2 id="experiment">Experiment</h2>
+<p>We generated a 1-dimensional linear regression case for testing. The data is simple enough: let <code>x</code> be the radius of some circles, and <code>y</code> be the corresponding area of the corresponding circles. We added a random noise so that the data looks more real. The snippet for data generation is as follows. 50 radius samples, ranging from 0 to 10 are generated.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">50</span>)</span><br><span class="line">y = (x + np.random.rand(<span class="number">50</span>)) ** <span class="number">2</span> * np.pi</span><br><span class="line">x = np.reshape(x, (<span class="number">50</span>, <span class="number">1</span>))</span><br><span class="line">y = np.reshape(y, (<span class="number">50</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>The following code will use <code>sklearn.linear_model.LinearRegression</code> to train a linear regression model and plot the prediction with its training scatter map.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">regressor = sklearn.linear_model.LinearRegression()</span><br><span class="line">regressor.fit(x, y)</span><br><span class="line">plt.plot(x, regressor.predict(x), color=<span class="string">&#x27;red&#x27;</span>, linewidth=<span class="number">0.5</span>)</span><br><span class="line">plt.scatter(x, y, color=<span class="string">&#x27;blue&#x27;</span>, s=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg" alt="No-Transformation" /></p>
+<p>We can get the <span class="math inline">\(\lambda\)</span> for box-cox transformation with the following code, which sets the searching range to be <span class="math inline">\([-3, \ 3]\)</span>, and use <span class="math inline">\(1000\)</span> probes. The graph is illustrated, and the code suggests the best <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(0.5075\)</span>, which is close enough for the theoretical best <span class="math inline">\(\lambda = 0.5\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">potential_lmbdas = np.linspace(<span class="number">-3</span>, <span class="number">3</span>, <span class="number">1000</span>)</span><br><span class="line">likelihoods = np.array([log_likelihood(lmbda, x, y) <span class="keyword">for</span> lmbda <span class="keyword">in</span> potential_lmbdas])</span><br><span class="line">plt.plot(potential_lmbdas, likelihoods)</span><br><span class="line">print(<span class="string">&#x27;Estimation for lambda:&#x27;</span>, potential_lmbdas[np.argmax(likelihoods)])</span><br></pre></td></tr></table></figure>
+<p><img src="http://209.250.236.3:1910/bloghost/pf88bgTt9uhhZo7YD6Dcuj.jpeg" alt="Likelihood" /></p>
+<p>Now we can fit the linear model again, and plot the new result and the plot shows significant improvement.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">regressor = sklearn.linear_model.LinearRegression()</span><br><span class="line">regressor.fit(x, scipy.stats.boxcox(y, lmbda=<span class="number">0.5075</span>))</span><br><span class="line">plt.plot(x, scipy.special.inv_boxcox(regressor.predict(x), <span class="number">0.5075</span>), color=<span class="string">&#x27;red&#x27;</span>, linewidth=<span class="number">0.5</span>)</span><br><span class="line">plt.scatter(x, y, color=<span class="string">&#x27;blue&#x27;</span>, s=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://209.250.236.3:1910/bloghost/37DcH4cD4YqK2NhVAwJXZN.jpeg" alt="Transformation" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Statistics/" rel="tag"># Statistics</a>
+              <a href="/tags/Regression-Model/" rel="tag"># Regression Model</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/length-telomere/" rel="prev" title="Predicting Human Age with the Length of Telomere">
+      <i class="fa fa-chevron-left"></i> Predicting Human Age with the Length of Telomere
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/30-hour-zurich/" rel="next" title="30 小时的苏黎世">
+      30 小时的苏黎世 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#representation-of-linear-model"><span class="nav-number">1.</span> <span class="nav-text">Representation of Linear Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#one-dimensional-case"><span class="nav-number">1.1.</span> <span class="nav-text">One-Dimensional Case</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-dimensional-case"><span class="nav-number">1.2.</span> <span class="nav-text">Multi-Dimensional Case</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#model-for-training-set"><span class="nav-number">1.3.</span> <span class="nav-text">Model for Training Set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#finding-the-best-lambda"><span class="nav-number">2.</span> <span class="nav-text">Finding the Best \(\lambda\)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python-implementation"><span class="nav-number">3.</span> <span class="nav-text">Python Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#implementation"><span class="nav-number">3.1.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#experiment"><span class="nav-number">3.2.</span> <span class="nav-text">Experiment</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Frost Lee"
+      src="/images/Avatar.png">
+  <p class="site-author-name" itemprop="name">Frost Lee</p>
+  <div class="site-description" itemprop="description">Civilize the age.</div>
+</div>
+
+
+   <div class="feed-link motion-element">
+     <a href="/atom.xml" rel="alternate">
+       <i class="fa fa-rss"></i>
+       RSS
+     </a>
+   </div>
+ 
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Frost-Lee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Frost-Lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/10068755/frost-lee" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;10068755&#x2F;frost-lee" rel="noopener external nofollow noreferrer" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact.FrostLee@gmail.com" title="E-Mail → mailto:contact.FrostLee@gmail.com" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Frost Lee</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '13c40b3687a06d2c9a84',
+      clientSecret: '3ce983fcf815d6ee689b8e00d1bec23a7973c396',
+      repo        : 'Frost-Lee.github.io',
+      owner       : 'Frost-Lee',
+      admin       : ['Frost-Lee'],
+      id          : '/box-cox-linear-model/',
+        language: 'en',
+      distractionFreeMode: true,
+      proxy: 'http://209.250.236.3:8080/https://github.com/login/oauth/access_token'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
