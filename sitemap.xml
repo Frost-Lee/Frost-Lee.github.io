@@ -179,13 +179,6 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
-    <lastmod>2021-05-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/tags/Python/</loc>
     <lastmod>2021-05-01</lastmod>
     <changefreq>daily</changefreq>
@@ -201,6 +194,13 @@
   
   <url>
     <loc>https://frost-lee.github.io/tags/Regression-Model/</loc>
+    <lastmod>2021-05-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
     <lastmod>2021-05-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -314,13 +314,6 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Free-Thinking/</loc>
-    <lastmod>2021-05-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/categories/Mathematics/</loc>
     <lastmod>2021-05-01</lastmod>
     <changefreq>daily</changefreq>
@@ -328,7 +321,7 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Data-Analysis/</loc>
+    <loc>https://frost-lee.github.io/categories/Free-Thinking/</loc>
     <lastmod>2021-05-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -336,6 +329,13 @@
   
   <url>
     <loc>https://frost-lee.github.io/categories/Developer-General/</loc>
+    <lastmod>2021-05-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/categories/Data-Analysis/</loc>
     <lastmod>2021-05-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
