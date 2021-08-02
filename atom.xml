@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2021-08-02T03:55:24.966Z</updated>
+  <updated>2021-08-02T04:43:33.018Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://frost-lee.github.io/retro-munich/"/>
     <id>https://frost-lee.github.io/retro-munich/</id>
     <published>2021-05-02T03:25:05.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;人类的本质是鸽子。在欧洲交换的那段时间，我写了无数关于旅游的 blog，但唯独亏欠了我常驻的慕尼黑。在慕尼黑的时间太长，经历太多，几乎所有的事情对我来说都是崭新的，而能力有限的我很难想出来什么办法在一篇 blog 体现出来这些内容。但在我 23 岁生日那天，Sherry 送了我一叠慕尼黑的照片当做礼物，在每张照片之后，还有她对这张照片的联想。或许，抛下自己的经历，用另一个人的视角来回望慕尼黑也很不错？</summary>
@@ -31,9 +31,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -42,7 +42,7 @@
     <link href="https://frost-lee.github.io/segmentation-coreml/"/>
     <id>https://frost-lee.github.io/segmentation-coreml/</id>
     <published>2021-02-12T05:09:16.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;Core ML offers a great way for conducting machine learning on Apple devices. Developers could download existing Core ML models from various sources such as &lt;a href=&quot;https://developer.apple.com/machine-learning/models/&quot;&gt;here&lt;/a&gt; or train a model from various templates in CreateML. For more flexibility, they could also train a model with other frameworks and convert it to Core ML. This article records my experiment on conducting on-device semantic segmentation by converting a Keras model to Core ML.</summary>
@@ -84,7 +84,7 @@
     <link href="https://frost-lee.github.io/designed-apple/"/>
     <id>https://frost-lee.github.io/designed-apple/</id>
     <published>2020-07-26T09:06:25.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.apple.com/designed-by-apple/&quot;&gt;《Designed by Apple in California》&lt;/a&gt; 是 Apple 在 2016 年推出的一本设计图册。这是一本几乎没有文字的书，但其中精心拍摄的产品图片记录着 Apple 从 1998 年到 2015 年的历史，也记录着站在这些产品背后的人。推出之始，这本书的价格对我来说无疑劝退，但当四年之后它濒临售罄时，我终于再度想起了它，并通过日本的代购让其中的一本远渡重洋，来到了我的手中。</summary>
@@ -103,7 +103,7 @@
     <link href="https://frost-lee.github.io/longest-day/"/>
     <id>https://frost-lee.github.io/longest-day/</id>
     <published>2020-05-16T18:15:10.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 20 岁临近末尾的时候，我的生活发生了最令人激动的变化之一：我决定打破中规中矩的本科生活，选择用延迟毕业一年的代价，参加一次在德国的学期交换以及一次美国的访问学者项目。大约 5 个月后，我出现在凌晨的慕尼黑机场里，来回踱步以化解困意。那是我保持相对清醒最长的一次，也是我觉得最能概括我游学经历的一天。</summary>
@@ -113,11 +113,11 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -164,7 +164,7 @@
     <link href="https://frost-lee.github.io/rgbd-iphone/"/>
     <id>https://frost-lee.github.io/rgbd-iphone/</id>
     <published>2019-11-08T15:02:38.000Z</published>
-    <updated>2021-08-02T03:55:24.967Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;A rectilinear RGBD image will help a lot in computer vision tasks, such as 3D reconstruction. This tutorial will illustrate how to capture RGBD data with iPhone, export the data to Python, and rectify the data.</summary>
@@ -189,7 +189,7 @@
     <link href="https://frost-lee.github.io/farewell-vienna/"/>
     <id>https://frost-lee.github.io/farewell-vienna/</id>
     <published>2019-10-19T08:02:32.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;交换学期的最后一场旅行：摩天轮，蛋糕，宫殿以及世界各国的朋友们似乎可以弥补没有到金色大厅的遗憾。</summary>
@@ -199,9 +199,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -227,7 +227,7 @@
     <link href="https://frost-lee.github.io/apple-new-york/"/>
     <id>https://frost-lee.github.io/apple-new-york/</id>
     <published>2019-09-21T05:51:37.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;和 Tim Cook 自拍，参与 Apple Fifth Avenue 的重新开业活动，购买 Apple Watch Series 5，在纽约街上躺着过夜，走过纽约的著名景点。24 小时中，发生了无数以前根本没有想过的疯狂的事情。</summary>
@@ -237,9 +237,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -248,7 +248,7 @@
     <link href="https://frost-lee.github.io/prague-life/"/>
     <id>https://frost-lee.github.io/prague-life/</id>
     <published>2019-08-27T10:47:37.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;旅行分两种，一种是马不停蹄打卡所有景点的硬核旅行，一种是每天睡懒觉好吃好喝的同时花一小部分时间随处走走逛逛的养老旅行。而我在布拉格的日子，应该算是后一种。</summary>
@@ -258,9 +258,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -309,7 +309,7 @@
     <link href="https://frost-lee.github.io/30-hour-zurich/"/>
     <id>https://frost-lee.github.io/30-hour-zurich/</id>
     <published>2019-05-23T16:34:00.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;借在欧洲交换之便，在 2019 年 5 月的一个周末开始一场仅仅 30 小时的，说走就 5 天以后走的苏黎世之旅。</summary>
@@ -319,9 +319,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -330,7 +330,7 @@
     <link href="https://frost-lee.github.io/box-cox-linear-model/"/>
     <id>https://frost-lee.github.io/box-cox-linear-model/</id>
     <published>2019-05-12T01:38:46.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and the area of it. But this does not necessarily mean the linear model is not suitable for them. By applying certain transformations, the model can still be optimized for more realistic problems.</summary>
@@ -353,7 +353,7 @@
     <link href="https://frost-lee.github.io/length-telomere/"/>
     <id>https://frost-lee.github.io/length-telomere/</id>
     <published>2019-05-09T09:29:55.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;My friend Marcus Mao (I&#39;d call him &quot;Chairman Mao&quot;) is working on his research program on this topic, and I was honorably invited to do the data analysis part of his work. The data came from testing the length of telomere of cells from human hair. Obtaining the data can be tough and time consuming, but let&#39;s keep it simple and just focus on the data analysis itself.</summary>
@@ -374,7 +374,7 @@
     <link href="https://frost-lee.github.io/tip-playground/"/>
     <id>https://frost-lee.github.io/tip-playground/</id>
     <published>2019-03-30T14:28:21.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;If you have experience in iOS development with Swift, making a Swift Playground application would not be a tough job for you. However, there are still some differences between developing an iOS application and a Swift Playground application</summary>
@@ -397,7 +397,7 @@
     <link href="https://frost-lee.github.io/german-visa-application/"/>
     <id>https://frost-lee.github.io/german-visa-application/</id>
     <published>2019-02-02T15:52:29.000Z</published>
-    <updated>2021-08-02T03:55:24.966Z</updated>
+    <updated>2021-08-02T04:43:33.018Z</updated>
     
     
     <summary type="html">&lt;p&gt;我就读于浙江大学，在 2018 年 10 月左右申请了慕尼黑工业大学（Technische Universität München，TUM）的2019 年夏学期 TUM Exchange 项目，之后便是相应的准备工作，从在浙江大学和 TUM 的申请到留德人员审核（APS），最终在 2019 年 3 月 2 日最终收到签证，前前后后四个多月，特写此博客以记录。</summary>

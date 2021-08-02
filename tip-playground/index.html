@@ -31,15 +31,15 @@
 <meta property="og:site_name" content="Frost&#39;s Blog">
 <meta property="og:description" content="If you have experience in iOS development with Swift, making a Swift Playground application would not be a tough job for you. However, there are still some differences between developing an iOS applic">
 <meta property="og:locale">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg">
+<meta property="og:image" content="https://tsanchenli.com:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg">
 <meta property="article:published_time" content="2019-03-30T14:28:21.000Z">
-<meta property="article:modified_time" content="2021-08-02T03:55:24.966Z">
+<meta property="article:modified_time" content="2021-08-02T04:43:33.018Z">
 <meta property="article:author" content="Frost Lee">
 <meta property="article:tag" content="iOS">
 <meta property="article:tag" content="Swift">
 <meta property="article:tag" content="Swift Playground">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg">
+<meta name="twitter:image" content="https://tsanchenli.com:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg">
 
 <link rel="canonical" href="https://frost-lee.github.io/tip-playground/">
 
@@ -215,7 +215,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-02 11:55:24" itemprop="dateModified" datetime="2021-08-02T11:55:24+08:00">2021-08-02</time>
+                <time title="Modified: 2021-08-02 12:43:33" itemprop="dateModified" datetime="2021-08-02T12:43:33+08:00">2021-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,7 +246,7 @@
 <li>Write, AirDrop, test run, and again.</li>
 </ul>
 <p>Note that the sample code in this article can be found in <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Frost-Lee/Now-You-Hear-Me">this repository</a>.</p>
-<p><img src="http://209.250.236.3:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg" alt="Now You Hear Me" /></p>
+<p><img src="https://tsanchenli.com:1910/bloghost/XpGMBbkdxtBNZNgcrW9eAj.jpeg" alt="Now You Hear Me" /></p>
 <h1 id="adding-source-file-to-your-project">Adding Source File to Your Project</h1>
 <p>Even though the single view playground template defines a <code>UIViewController</code> class in the file <code>Contents.swift</code>, the <code>./Sources/</code> folder is capable of placing the source code files, and it is strongly recommended to create the classes in separate files instead of writing everything in <code>Contents.swift</code>.</p>
 <p>I personally noticed that there would be unreasonable dispatch queue issues with the code execution. In brief, the code execution queue in <code>Contents.swift</code> may not be identical to the queue that is supposed to be executed, this could cause run time error, and of course, iPad would not indicate anything about the error: it would just suggest that there is something going wrong, and you need to check your code. Sometimes the error would be eliminated with <code>DispatchQueue.main.async</code> method, others are more complicated, and the performance varies from the version of iPad, and from each run to other runs. For instance, the Playground workes fine on iPad 2018 would fail on iPad Pro, and the code that works well this time might fail the next time you run it. Thus, to make your life easier, simply place most of the code on the files in <code>./Sources/</code>, instead of writing everything in a single file.</p>
