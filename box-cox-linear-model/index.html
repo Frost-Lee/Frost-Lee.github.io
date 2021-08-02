@@ -31,17 +31,17 @@
 <meta property="og:site_name" content="Frost&#39;s Blog">
 <meta property="og:description" content="The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and th">
 <meta property="og:locale">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/pf88bgTt9uhhZo7YD6Dcuj.jpeg">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/37DcH4cD4YqK2NhVAwJXZN.jpeg">
+<meta property="og:image" content="https://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg">
+<meta property="og:image" content="https://209.250.236.3:1910/bloghost/pf88bgTt9uhhZo7YD6Dcuj.jpeg">
+<meta property="og:image" content="https://209.250.236.3:1910/bloghost/37DcH4cD4YqK2NhVAwJXZN.jpeg">
 <meta property="article:published_time" content="2019-05-12T01:38:46.000Z">
-<meta property="article:modified_time" content="2021-01-31T12:20:26.511Z">
+<meta property="article:modified_time" content="2021-08-02T03:49:56.238Z">
 <meta property="article:author" content="Frost Lee">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Statistics">
 <meta property="article:tag" content="Regression Model">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg">
+<meta name="twitter:image" content="https://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg">
 
 <link rel="canonical" href="https://frost-lee.github.io/box-cox-linear-model/">
 
@@ -217,7 +217,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-31 20:20:26" itemprop="dateModified" datetime="2021-01-31T20:20:26+08:00">2021-01-31</time>
+                <time title="Modified: 2021-08-02 11:49:56" itemprop="dateModified" datetime="2021-08-02T11:49:56+08:00">2021-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -373,13 +373,13 @@ L(\beta, \sigma) = (2 \pi e)^{-\frac{n}{2}} J \left( \frac{\textbf{y}^{(\lambda)
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">50</span>)</span><br><span class="line">y = (x + np.random.rand(<span class="number">50</span>)) ** <span class="number">2</span> * np.pi</span><br><span class="line">x = np.reshape(x, (<span class="number">50</span>, <span class="number">1</span>))</span><br><span class="line">y = np.reshape(y, (<span class="number">50</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
 <p>The following code will use <code>sklearn.linear_model.LinearRegression</code> to train a linear regression model and plot the prediction with its training scatter map.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">regressor = sklearn.linear_model.LinearRegression()</span><br><span class="line">regressor.fit(x, y)</span><br><span class="line">plt.plot(x, regressor.predict(x), color=<span class="string">&#x27;red&#x27;</span>, linewidth=<span class="number">0.5</span>)</span><br><span class="line">plt.scatter(x, y, color=<span class="string">&#x27;blue&#x27;</span>, s=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg" alt="No-Transformation" /></p>
+<p><img src="https://209.250.236.3:1910/bloghost/SPSCTmgYSNEtNsty8buW2k.jpeg" alt="No-Transformation" /></p>
 <p>We can get the <span class="math inline">\(\lambda\)</span> for box-cox transformation with the following code, which sets the searching range to be <span class="math inline">\([-3, \ 3]\)</span>, and use <span class="math inline">\(1000\)</span> probes. The graph is illustrated, and the code suggests the best <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(0.5075\)</span>, which is close enough for the theoretical best <span class="math inline">\(\lambda = 0.5\)</span>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">potential_lmbdas = np.linspace(<span class="number">-3</span>, <span class="number">3</span>, <span class="number">1000</span>)</span><br><span class="line">likelihoods = np.array([log_likelihood(lmbda, x, y) <span class="keyword">for</span> lmbda <span class="keyword">in</span> potential_lmbdas])</span><br><span class="line">plt.plot(potential_lmbdas, likelihoods)</span><br><span class="line">print(<span class="string">&#x27;Estimation for lambda:&#x27;</span>, potential_lmbdas[np.argmax(likelihoods)])</span><br></pre></td></tr></table></figure>
-<p><img src="http://209.250.236.3:1910/bloghost/pf88bgTt9uhhZo7YD6Dcuj.jpeg" alt="Likelihood" /></p>
+<p><img src="https://209.250.236.3:1910/bloghost/pf88bgTt9uhhZo7YD6Dcuj.jpeg" alt="Likelihood" /></p>
 <p>Now we can fit the linear model again, and plot the new result and the plot shows significant improvement.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">regressor = sklearn.linear_model.LinearRegression()</span><br><span class="line">regressor.fit(x, scipy.stats.boxcox(y, lmbda=<span class="number">0.5075</span>))</span><br><span class="line">plt.plot(x, scipy.special.inv_boxcox(regressor.predict(x), <span class="number">0.5075</span>), color=<span class="string">&#x27;red&#x27;</span>, linewidth=<span class="number">0.5</span>)</span><br><span class="line">plt.scatter(x, y, color=<span class="string">&#x27;blue&#x27;</span>, s=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://209.250.236.3:1910/bloghost/37DcH4cD4YqK2NhVAwJXZN.jpeg" alt="Transformation" /></p>
+<p><img src="https://209.250.236.3:1910/bloghost/37DcH4cD4YqK2NhVAwJXZN.jpeg" alt="Transformation" /></p>
 
     </div>
 

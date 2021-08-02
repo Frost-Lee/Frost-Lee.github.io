@@ -31,16 +31,16 @@
 <meta property="og:site_name" content="Frost&#39;s Blog">
 <meta property="og:description" content="My friend Marcus Mao (I&#39;d call him &quot;Chairman Mao&quot;) is working on his research program on this topic, and I was honorably invited to do the data analysis part of his work. The data came from testing th">
 <meta property="og:locale">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/27TrtnfZX5jWicFz5qDohM.jpeg">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/5wfmG58rDXudRzvYx7iiEo.jpeg">
-<meta property="og:image" content="http://209.250.236.3:1910/bloghost/ZYLx8PeDUgMgrGnNsEmywj.jpeg">
+<meta property="og:image" content="https://209.250.236.3:1910/bloghost/27TrtnfZX5jWicFz5qDohM.jpeg">
+<meta property="og:image" content="https://209.250.236.3:1910/bloghost/5wfmG58rDXudRzvYx7iiEo.jpeg">
+<meta property="og:image" content="https://209.250.236.3:1910/bloghost/ZYLx8PeDUgMgrGnNsEmywj.jpeg">
 <meta property="article:published_time" content="2019-05-09T09:29:55.000Z">
-<meta property="article:modified_time" content="2021-01-31T14:51:15.659Z">
+<meta property="article:modified_time" content="2021-08-02T03:49:56.238Z">
 <meta property="article:author" content="Frost Lee">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Regression Model">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/27TrtnfZX5jWicFz5qDohM.jpeg">
+<meta name="twitter:image" content="https://209.250.236.3:1910/bloghost/27TrtnfZX5jWicFz5qDohM.jpeg">
 
 <link rel="canonical" href="https://frost-lee.github.io/length-telomere/">
 
@@ -216,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-31 22:51:15" itemprop="dateModified" datetime="2021-01-31T22:51:15+08:00">2021-01-31</time>
+                <time title="Modified: 2021-08-02 11:49:56" itemprop="dateModified" datetime="2021-08-02T11:49:56+08:00">2021-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,12 +248,12 @@
 <p>Before working on the data analysis problem, the data needs to be imported. The data import command is illustrated as follows. Note that the value of gender is represented with 0 and 1, which stand for male and female.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telomere_df = pd.read_csv(<span class="string">&#x27;./telomere.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>Here's a glance of the data frame.</p>
-<p><img src="http://209.250.236.3:1910/bloghost/27TrtnfZX5jWicFz5qDohM.jpeg" alt="df_glance" /></p>
+<p><img src="https://209.250.236.3:1910/bloghost/27TrtnfZX5jWicFz5qDohM.jpeg" alt="df_glance" /></p>
 <h2 id="data-distribution">Data Distribution</h2>
 <p>To illustrate the distribution of the sample data, I used matplotlib to draw the scatter map of the data. Gender is annotated by different colors: red is for females, and blue is for males. The x-axis represents the length of the telomere, and the y-axis represents the age of the corresponding participant. The following code would help to draw the scatter map.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">male_df = telomere_df[telomere_df[<span class="string">&#x27;Gender&#x27;</span>] == <span class="number">0</span>]</span><br><span class="line">female_df = telomere_df[telomere_df[<span class="string">&#x27;Gender&#x27;</span>] == <span class="number">1</span>]</span><br><span class="line">plt.xlim((<span class="number">25</span>, <span class="number">65</span>))</span><br><span class="line">plt.ylim((<span class="number">0</span>, <span class="number">110</span>))</span><br><span class="line">plt.scatter(male_df[<span class="string">&#x27;Length&#x27;</span>].values, male_df[<span class="string">&#x27;Age&#x27;</span>].values, color=<span class="string">&#x27;blue&#x27;</span>, s=<span class="number">2</span>)</span><br><span class="line">plt.scatter(female_df[<span class="string">&#x27;Length&#x27;</span>].values, female_df[<span class="string">&#x27;Age&#x27;</span>].values, color=<span class="string">&#x27;red&#x27;</span>, s=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>Here is the scatter map of the data samples. As can be seen, they seem to have some relationships, instead of a bunch of random noise, not bad!</p>
-<p><img src="http://209.250.236.3:1910/bloghost/5wfmG58rDXudRzvYx7iiEo.jpeg" alt="Scatter Map" /></p>
+<p><img src="https://209.250.236.3:1910/bloghost/5wfmG58rDXudRzvYx7iiEo.jpeg" alt="Scatter Map" /></p>
 <h2 id="correlation-between-variables">Correlation between Variables</h2>
 <p>The relationship between two distributions can be determined with correlation, usually represented as <span class="math inline">\(r\)</span>. The interval which <span class="math inline">\(r\)</span> lies on is <span class="math inline">\([-1, 1]\)</span>, the greater absolute value it has, the stronger relationship there is between the two distributions. If <span class="math inline">\(r\)</span> is positive, it means the two distributions are positively related, otherwise they are negatively related. Here is the formula to calculate the correlation between two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. <span class="math display">\[
 \newcommand{\Cov}{\mathrm{Cov}}
@@ -291,7 +291,7 @@ y = \euler^{6.55718 -0.06627l - 0.08695g}
 <p>The following command would help to plot the curve of our prediction along with the scatter points of our samples. Since the two dimensional feature cannot be represented with only one axis, I plotted two curves, assuming gender is male or female, and the length of telomere varies with axises.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">male_axis = np.array([np.array([axis, <span class="number">0</span>]) <span class="keyword">for</span> axis <span class="keyword">in</span> np.arange(<span class="number">30</span>, <span class="number">60</span>, <span class="number">0.1</span>)])</span><br><span class="line">female_axis = np.array([np.array([axis, <span class="number">1</span>]) <span class="keyword">for</span> axis <span class="keyword">in</span> np.arange(<span class="number">30</span>, <span class="number">60</span>, <span class="number">0.1</span>)])</span><br><span class="line">plt.xlim((<span class="number">25</span>, <span class="number">65</span>))</span><br><span class="line">plt.ylim((<span class="number">0</span>, <span class="number">110</span>))</span><br><span class="line">plt.plot(male_axis[:,<span class="number">0</span>], np.exp(regressor.predict(male_axis)), color=<span class="string">&#x27;blue&#x27;</span>, linewidth=<span class="number">0.5</span>)</span><br><span class="line">plt.plot(female_axis[:,<span class="number">0</span>], np.exp(regressor.predict(female_axis)), color=<span class="string">&#x27;red&#x27;</span>, linewidth=<span class="number">0.5</span>)</span><br><span class="line">plt.scatter(male_df[<span class="string">&#x27;Length&#x27;</span>].values, male_df[<span class="string">&#x27;Age&#x27;</span>].values, color=<span class="string">&#x27;blue&#x27;</span>, s=<span class="number">2</span>)</span><br><span class="line">plt.scatter(female_df[<span class="string">&#x27;Length&#x27;</span>].values, female_df[<span class="string">&#x27;Age&#x27;</span>].values, color=<span class="string">&#x27;red&#x27;</span>, s=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>The plot is as follows, although the gender does cause a difference, the two curves look basically the same, looks good enough!</p>
-<p><img src="http://209.250.236.3:1910/bloghost/ZYLx8PeDUgMgrGnNsEmywj.jpeg" alt="Regression Map" /></p>
+<p><img src="https://209.250.236.3:1910/bloghost/ZYLx8PeDUgMgrGnNsEmywj.jpeg" alt="Regression Map" /></p>
 
     </div>
 
