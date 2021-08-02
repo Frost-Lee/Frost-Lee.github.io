@@ -31,18 +31,18 @@
 <meta property="og:site_name" content="Frost&#39;s Blog">
 <meta property="og:description" content="A rectilinear RGBD image will help a lot in computer vision tasks, such as 3D reconstruction. This tutorial will illustrate how to capture RGBD data with iPhone, export the data to Python, and rectify">
 <meta property="og:locale">
-<meta property="og:image" content="https://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg">
-<meta property="og:image" content="https://209.250.236.3:1910/bloghost/x8CXGkwHuUM7zbjYwYHPXX.gif">
-<meta property="og:image" content="https://209.250.236.3:1910/bloghost/XCpR2dbSM6swwrep75hNhP.png">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/x8CXGkwHuUM7zbjYwYHPXX.gif">
+<meta property="og:image" content="http://209.250.236.3:1910/bloghost/XCpR2dbSM6swwrep75hNhP.png">
 <meta property="article:published_time" content="2019-11-08T15:02:38.000Z">
-<meta property="article:modified_time" content="2021-08-02T03:49:56.238Z">
+<meta property="article:modified_time" content="2021-08-02T03:55:24.967Z">
 <meta property="article:author" content="Frost Lee">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="iOS">
 <meta property="article:tag" content="Swift">
 <meta property="article:tag" content="C">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg">
+<meta name="twitter:image" content="http://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg">
 
 <link rel="canonical" href="https://frost-lee.github.io/rgbd-iphone/">
 
@@ -218,7 +218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-02 11:49:56" itemprop="dateModified" datetime="2021-08-02T11:49:56+08:00">2021-08-02</time>
+                <time title="Modified: 2021-08-02 11:55:24" itemprop="dateModified" datetime="2021-08-02T11:55:24+08:00">2021-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -302,7 +302,7 @@
 <p>I choose to POST the image as a .jpg file and the wrapped depth data as a .json file to my server. To present the data you've got, using Jupyter Notebook is one of the easiest ways. You can extract the colored image and the depth map as <code>numpy.array</code> and visualize them using <code>matplotlib.pyplot</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;/path/to/file.json&#x27;</span>) <span class="keyword">as</span> in_file:</span><br><span class="line">    json_content = json.loads(in_file.read())</span><br><span class="line">    depth_map = np.array(json_content[<span class="string">&#x27;depth_data&#x27;</span>]).astype(<span class="string">&#x27;float32&#x27;</span>)</span><br><span class="line">plt.imshow(depth_map)</span><br><span class="line">plt.colorbar()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">image = np.array(Image.<span class="built_in">open</span>(<span class="string">&#x27;/path/to/file.jpg&#x27;</span>))</span><br><span class="line">plt.imshow(image)</span><br></pre></td></tr></table></figure>
-<p><img src="https://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg" alt="Color Depth" /></p>
+<p><img src="http://209.250.236.3:1910/bloghost/ZE62bbnKg26USFDpkgaSQB.jpeg" alt="Color Depth" /></p>
 <h1 id="rectify-distorted-rgbd-data">Rectify Distorted RGBD Data</h1>
 <p>Now we have obtained the colored image and the depth map, as well as necessary camera intrinsics. However, there's one thing that is not satisfied: the distortion. The colored image is distorted since they are not taken by pin-hole camera. The lenses will distort the image when they allow more light to come in. The depth map, in order to match the colored image, is also manually distorted by Apple. To improve the accuracy on computer vision tasks, both of them are supposed to be rectilinear, say, undistorted. Luckily, Apple has provided the necessary data to help us to undistort or re-distort the image: <code>lensDistortionLookupTable</code> and <code>inverseLensDistortionLookupTable</code>.</p>
 <p>For a more detailed explanation, you should refer to <a target="_blank" rel="noopener external nofollow noreferrer" href="https://developer.apple.com/videos/play/wwdc2017/507/">WWDC 17 session: Capturing Depth in iPhone Photography</a>. In brief, the lookup table provides the magnification along the radius of the image: the line from the distortion center to the farthest corner of the image. In order to compensate the distortion, we can use the lookup table to determine the original coordinate of the pixel and put them in the right position.</p>
@@ -318,12 +318,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">undistort_dll = ctypes.CDLL(<span class="string">&#x27;/path/to/file.so&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rectify_image_c</span>(<span class="params">image, lookup_table, distortion_center</span>):</span></span><br><span class="line">    c_rectify_image = undistort_dll.rectify_image</span><br><span class="line">    c_rectify_image.restype = ctypes.POINTER(ctypes.c_double * functools.reduce(<span class="keyword">lambda</span> x, y: x * y, image.shape))</span><br><span class="line">    c_free_double_pointer = undistort_dll.free_double_pointer</span><br><span class="line">    c_free_double_pointer.restype = <span class="literal">None</span></span><br><span class="line">    channel = <span class="number">1</span> <span class="keyword">if</span> <span class="built_in">len</span>(image.shape) &lt; <span class="number">3</span> <span class="keyword">else</span> image.shape[<span class="number">2</span>]</span><br><span class="line">    original_datatype = image.dtype</span><br><span class="line">    image = np.ascontiguousarray(image.astype(<span class="string">&#x27;double&#x27;</span>))</span><br><span class="line">    raw_result = c_rectify_image(</span><br><span class="line">        image.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),</span><br><span class="line">        image.shape[<span class="number">0</span>],</span><br><span class="line">        image.shape[<span class="number">1</span>],</span><br><span class="line">        channel,</span><br><span class="line">        (ctypes.c_double * <span class="built_in">len</span>(lookup_table))(*lookup_table),</span><br><span class="line">        <span class="built_in">len</span>(lookup_table),</span><br><span class="line">        (ctypes.c_double * <span class="number">2</span>)(*distortion_center)</span><br><span class="line">    ).contents</span><br><span class="line">    reshaped_result = np.reshape(raw_result, image.shape).astype(original_datatype)</span><br><span class="line">    c_free_double_pointer(raw_result)</span><br><span class="line">    <span class="keyword">return</span> reshaped_result</span><br></pre></td></tr></table></figure>
 <p>By calling the Python method and pass the image as numpy array along with <code>lensDistortionLookupTable</code>, you are able to rectify the image. Note that the position of <code>lensDistortionCenter</code> refers to <code>intrinsicMatrixReferenceDimensions</code>. If your image size does not conform to it, remap the position of <code>lensDistortionCenter</code> accordingly.</p>
 <p>It's more obvious to use a gif to compare the difference between the original image and rectified image.</p>
-<p><img src="https://209.250.236.3:1910/bloghost/x8CXGkwHuUM7zbjYwYHPXX.gif" alt="Comparison" /></p>
+<p><img src="http://209.250.236.3:1910/bloghost/x8CXGkwHuUM7zbjYwYHPXX.gif" alt="Comparison" /></p>
 <h1 id="visualization">Visualization</h1>
 <p>By making use of the rectified RBGD image as well as the camera calibration data, we are able to project the image into 3D space as a point cloud. This method is extremely easy to implement. Here, you will need the optical center coordinate and the focal length.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get_3d_coordinate</span>(<span class="params">row, col, fl, oc_x, oc_y, depth</span>):</span></span><br><span class="line">    <span class="keyword">return</span> np.array([(row - oc_x) * depth / fl, (col - oc_y) * depth / fl, depth])</span><br></pre></td></tr></table></figure>
 <p>By using <code>open3d</code> or <code>pptk</code>, you will be able to visualize the point cloud.</p>
-<p><img src="https://209.250.236.3:1910/bloghost/XCpR2dbSM6swwrep75hNhP.png" alt="Point Cloud" /></p>
+<p><img src="http://209.250.236.3:1910/bloghost/XCpR2dbSM6swwrep75hNhP.png" alt="Point Cloud" /></p>
 
     </div>
 

@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://frost-lee.github.io/designed-apple/</loc>
+    <loc>https://frost-lee.github.io/rgbd-iphone/</loc>
     
     <lastmod>2021-08-02</lastmod>
     
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/german-visa-application/</loc>
+    <loc>https://frost-lee.github.io/apple-new-york/</loc>
     
     <lastmod>2021-08-02</lastmod>
     
@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://frost-lee.github.io/designed-apple/</loc>
+    
+    <lastmod>2021-08-02</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://frost-lee.github.io/box-cox-linear-model/</loc>
     
     <lastmod>2021-08-02</lastmod>
@@ -30,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/apple-new-york/</loc>
+    <loc>https://frost-lee.github.io/german-visa-application/</loc>
     
     <lastmod>2021-08-02</lastmod>
     
@@ -51,6 +58,13 @@
   </url>
   
   <url>
+    <loc>https://frost-lee.github.io/longest-day/</loc>
+    
+    <lastmod>2021-08-02</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://frost-lee.github.io/prague-life/</loc>
     
     <lastmod>2021-08-02</lastmod>
@@ -65,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tip-playground/</loc>
-    
-    <lastmod>2021-08-02</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/segmentation-coreml/</loc>
     
     <lastmod>2021-08-02</lastmod>
@@ -79,14 +86,7 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/rgbd-iphone/</loc>
-    
-    <lastmod>2021-08-02</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://frost-lee.github.io/longest-day/</loc>
+    <loc>https://frost-lee.github.io/tip-playground/</loc>
     
     <lastmod>2021-08-02</lastmod>
     
@@ -165,7 +165,7 @@
 
   
   <url>
-    <loc>https://frost-lee.github.io/tags/Europe/</loc>
+    <loc>https://frost-lee.github.io/tags/USA/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -173,6 +173,20 @@
   
   <url>
     <loc>https://frost-lee.github.io/tags/Travel/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/Europe/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -194,20 +208,6 @@
   
   <url>
     <loc>https://frost-lee.github.io/tags/Regression-Model/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://frost-lee.github.io/tags/USA/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -256,13 +256,6 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/Shadowsocks/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/tags/iOS/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -277,7 +270,7 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/Swift-Playground/</loc>
+    <loc>https://frost-lee.github.io/tags/C/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -291,7 +284,14 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/C/</loc>
+    <loc>https://frost-lee.github.io/tags/Shadowsocks/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/Swift-Playground/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -307,14 +307,14 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Mathematics/</loc>
+    <loc>https://frost-lee.github.io/categories/Free-Thinking/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Free-Thinking/</loc>
+    <loc>https://frost-lee.github.io/categories/Mathematics/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
