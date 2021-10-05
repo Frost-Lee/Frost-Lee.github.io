@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2021-08-02T04:43:33.018Z</updated>
+  <updated>2021-10-05T05:23:45.642Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -17,10 +17,27 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一个实习生的来信</title>
+    <link href="https://frost-lee.github.io/note-steve-10/"/>
+    <id>https://frost-lee.github.io/note-steve-10/</id>
+    <published>2021-10-05T04:42:02.000Z</published>
+    <updated>2021-10-05T05:23:45.642Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;你能想到，今天，2021 年 10 月 5 日，已经是 Steve Jobs 离开的第 10 个年头了么？在这个时节里，一个 Apple 的实习生在离职前一天，为 Steve 发去了一封 thank you note。也许这个实习生觉得即便在没有 Steve 的这 10 年之中，他在学习和事业上做出的无数选择和努力，都或多或少地与 Steve，与 Apple 有关吧。</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>回望慕尼黑</title>
     <link href="https://frost-lee.github.io/retro-munich/"/>
     <id>https://frost-lee.github.io/retro-munich/</id>
-    <published>2021-05-02T03:25:05.000Z</published>
+    <published>2021-05-02T15:25:05.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -41,7 +58,7 @@
     <title>On-Device Semantic Segmentation with Core ML</title>
     <link href="https://frost-lee.github.io/segmentation-coreml/"/>
     <id>https://frost-lee.github.io/segmentation-coreml/</id>
-    <published>2021-02-12T05:09:16.000Z</published>
+    <published>2021-02-12T18:09:16.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -62,7 +79,7 @@
     <title>Python Interpreter on macOS</title>
     <link href="https://frost-lee.github.io/macos-python/"/>
     <id>https://frost-lee.github.io/macos-python/</id>
-    <published>2020-10-05T03:20:33.000Z</published>
+    <published>2020-10-05T15:20:33.000Z</published>
     <updated>2021-01-29T09:06:53.887Z</updated>
     
     
@@ -83,7 +100,7 @@
     <title>《由加利福尼亚州 Apple 公司设计》序言</title>
     <link href="https://frost-lee.github.io/designed-apple/"/>
     <id>https://frost-lee.github.io/designed-apple/</id>
-    <published>2020-07-26T09:06:25.000Z</published>
+    <published>2020-07-26T21:06:25.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -102,7 +119,7 @@
     <title>最长的一天</title>
     <link href="https://frost-lee.github.io/longest-day/"/>
     <id>https://frost-lee.github.io/longest-day/</id>
-    <published>2020-05-16T18:15:10.000Z</published>
+    <published>2020-05-17T06:15:10.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -125,7 +142,7 @@
     <title>Setting Up Shadowsocks Service on an Ubuntu Server</title>
     <link href="https://frost-lee.github.io/shadowsocks-ubuntu/"/>
     <id>https://frost-lee.github.io/shadowsocks-ubuntu/</id>
-    <published>2020-01-25T04:45:19.000Z</published>
+    <published>2020-01-25T17:45:19.000Z</published>
     <updated>2021-01-29T11:19:59.971Z</updated>
     
     
@@ -144,7 +161,7 @@
     <title>A Memo for Time Series Analysis</title>
     <link href="https://frost-lee.github.io/memo-time-series/"/>
     <id>https://frost-lee.github.io/memo-time-series/</id>
-    <published>2020-01-15T03:29:22.000Z</published>
+    <published>2020-01-15T16:29:22.000Z</published>
     <updated>2021-05-01T05:10:16.934Z</updated>
     
     
@@ -163,7 +180,7 @@
     <title>Capture Rectilinear RGBD Data with iPhone</title>
     <link href="https://frost-lee.github.io/rgbd-iphone/"/>
     <id>https://frost-lee.github.io/rgbd-iphone/</id>
-    <published>2019-11-08T15:02:38.000Z</published>
+    <published>2019-11-09T04:02:38.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -188,7 +205,7 @@
     <title>离别的维也纳没有钢琴</title>
     <link href="https://frost-lee.github.io/farewell-vienna/"/>
     <id>https://frost-lee.github.io/farewell-vienna/</id>
-    <published>2019-10-19T08:02:32.000Z</published>
+    <published>2019-10-19T20:02:32.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -209,7 +226,7 @@
     <title>敬冰冷宇宙中的意识光辉</title>
     <link href="https://frost-lee.github.io/glory-of-consciousness/"/>
     <id>https://frost-lee.github.io/glory-of-consciousness/</id>
-    <published>2019-09-28T16:03:58.000Z</published>
+    <published>2019-09-29T04:03:58.000Z</published>
     <updated>2020-07-16T16:31:07.386Z</updated>
     
     
@@ -226,7 +243,7 @@
     <title>第五大道</title>
     <link href="https://frost-lee.github.io/apple-new-york/"/>
     <id>https://frost-lee.github.io/apple-new-york/</id>
-    <published>2019-09-21T05:51:37.000Z</published>
+    <published>2019-09-21T17:51:37.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -247,7 +264,7 @@
     <title>布拉格的养老生活</title>
     <link href="https://frost-lee.github.io/prague-life/"/>
     <id>https://frost-lee.github.io/prague-life/</id>
-    <published>2019-08-27T10:47:37.000Z</published>
+    <published>2019-08-27T22:47:37.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -268,7 +285,7 @@
     <title>如何推翻“所有自然数都可以唯一地用不超过23个汉字表达”的反证法证明</title>
     <link href="https://frost-lee.github.io/how-overthrow-23-lemma/"/>
     <id>https://frost-lee.github.io/how-overthrow-23-lemma/</id>
-    <published>2019-07-01T02:32:02.000Z</published>
+    <published>2019-07-01T14:32:02.000Z</published>
     <updated>2020-07-16T16:31:07.387Z</updated>
     
     
@@ -287,7 +304,7 @@
     <title>Preprocessing Methods and Pipeline of Data Mining: An Overview</title>
     <link href="https://frost-lee.github.io/preprocessing-pipeline-dm/"/>
     <id>https://frost-lee.github.io/preprocessing-pipeline-dm/</id>
-    <published>2019-06-15T19:37:13.000Z</published>
+    <published>2019-06-16T07:37:13.000Z</published>
     <updated>2021-01-31T12:06:35.378Z</updated>
     
     
@@ -308,7 +325,7 @@
     <title>30 小时的苏黎世</title>
     <link href="https://frost-lee.github.io/30-hour-zurich/"/>
     <id>https://frost-lee.github.io/30-hour-zurich/</id>
-    <published>2019-05-23T16:34:00.000Z</published>
+    <published>2019-05-24T04:34:00.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -329,7 +346,7 @@
     <title>Implementing Box-Cox Transformation for Linear Model</title>
     <link href="https://frost-lee.github.io/box-cox-linear-model/"/>
     <id>https://frost-lee.github.io/box-cox-linear-model/</id>
-    <published>2019-05-12T01:38:46.000Z</published>
+    <published>2019-05-12T13:38:46.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -352,7 +369,7 @@
     <title>Predicting Human Age with the Length of Telomere</title>
     <link href="https://frost-lee.github.io/length-telomere/"/>
     <id>https://frost-lee.github.io/length-telomere/</id>
-    <published>2019-05-09T09:29:55.000Z</published>
+    <published>2019-05-09T21:29:55.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -373,7 +390,7 @@
     <title>Tips for Developing a Swift Playground</title>
     <link href="https://frost-lee.github.io/tip-playground/"/>
     <id>https://frost-lee.github.io/tip-playground/</id>
-    <published>2019-03-30T14:28:21.000Z</published>
+    <published>2019-03-31T02:28:21.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
@@ -396,7 +413,7 @@
     <title>德国交换签证申请</title>
     <link href="https://frost-lee.github.io/german-visa-application/"/>
     <id>https://frost-lee.github.io/german-visa-application/</id>
-    <published>2019-02-02T15:52:29.000Z</published>
+    <published>2019-02-03T04:52:29.000Z</published>
     <updated>2021-08-02T04:43:33.018Z</updated>
     
     
