@@ -34,27 +34,6 @@
   </entry>
   
   <entry>
-    <title>都市，大雪，以及国家公园</title>
-    <link href="https://frost-lee.github.io/metropolis-snow-park/"/>
-    <id>https://frost-lee.github.io/metropolis-snow-park/</id>
-    <published>2022-01-17T08:18:03.000Z</published>
-    <updated>2022-04-07T05:13:50.068Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;在美国前前后后呆了接近一年之后，我感觉我已经将要习惯这个所谓“荒凉”的地方了。你没法在这里期待便捷的公共交通，随时送达的外卖，安全的街头也行，甚至没法期待在需要做做家务，修修水管，清理一下满到溢出来的垃圾桶的时候会有人来帮助你。这里不再有 xx as a service 的感觉，取而代之的是需要自己动手处理一切能够自己处理的东西的孤独感。放到旅行上，这里也不再有高铁，旅游团或者铺天盖地的攻略。这里的旅行只是剩下几个人，一辆车，还有待在原地上千年不变的风景。</summary>
-    
-    
-    
-    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
-    
-    
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
-    <category term="United States" scheme="https://frost-lee.github.io/tags/United-States/"/>
-    
-  </entry>
-  
-  <entry>
     <title>一个实习生的来信</title>
     <link href="https://frost-lee.github.io/note-steve-10/"/>
     <id>https://frost-lee.github.io/note-steve-10/</id>
@@ -86,9 +65,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -187,11 +166,11 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -273,9 +252,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -311,9 +290,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -332,9 +311,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -393,9 +372,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -417,6 +396,27 @@
     <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
     
     <category term="Statistics" scheme="https://frost-lee.github.io/tags/Statistics/"/>
+    
+    <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Predicting Human Age with the Length of Telomere</title>
+    <link href="https://frost-lee.github.io/length-telomere/"/>
+    <id>https://frost-lee.github.io/length-telomere/</id>
+    <published>2019-05-10T00:29:55.000Z</published>
+    <updated>2022-01-16T04:53:03.242Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;My friend Marcus Mao (I&#39;d call him &quot;Chairman Mao&quot;) is working on his research program on this topic, and I was honorably invited to do the data analysis part of his work. The data came from testing the length of telomere of cells from human hair. Obtaining the data can be tough and time consuming, but let&#39;s keep it simple and just focus on the data analysis itself.</summary>
+    
+    
+    
+    <category term="Data Analysis" scheme="https://frost-lee.github.io/categories/Data-Analysis/"/>
+    
+    
+    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
     
     <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
     
