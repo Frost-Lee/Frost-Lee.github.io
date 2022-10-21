@@ -51,13 +51,6 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/designed-apple/</loc>
-    
-    <lastmod>2022-01-16</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/box-cox-linear-model/</loc>
     
     <lastmod>2022-01-16</lastmod>
@@ -65,7 +58,7 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/german-visa-application/</loc>
+    <loc>https://frost-lee.github.io/designed-apple/</loc>
     
     <lastmod>2022-01-16</lastmod>
     
@@ -73,6 +66,13 @@
   
   <url>
     <loc>https://frost-lee.github.io/farewell-vienna/</loc>
+    
+    <lastmod>2022-01-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/german-visa-application/</loc>
     
     <lastmod>2022-01-16</lastmod>
     
@@ -214,21 +214,7 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/USA/</loc>
-    <lastmod>2022-10-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/tags/Restaurant/</loc>
-    <lastmod>2022-10-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
     <lastmod>2022-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -250,6 +236,20 @@
   
   <url>
     <loc>https://frost-lee.github.io/tags/Regression-Model/</loc>
+    <lastmod>2022-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/USA/</loc>
+    <lastmod>2022-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
     <lastmod>2022-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -319,14 +319,14 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/Shadowsocks/</loc>
+    <loc>https://frost-lee.github.io/tags/Machine-Learning/</loc>
     <lastmod>2022-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/Machine-Learning/</loc>
+    <loc>https://frost-lee.github.io/tags/Shadowsocks/</loc>
     <lastmod>2022-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -370,14 +370,14 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Developer-General/</loc>
+    <loc>https://frost-lee.github.io/categories/Data-Analysis/</loc>
     <lastmod>2022-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Data-Analysis/</loc>
+    <loc>https://frost-lee.github.io/categories/Developer-General/</loc>
     <lastmod>2022-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
