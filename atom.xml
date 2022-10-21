@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2022-05-19T07:21:02.320Z</updated>
+  <updated>2022-10-21T20:58:45.408Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ad hoc</title>
+    <link href="https://frost-lee.github.io/ad-hoc/"/>
+    <id>https://frost-lee.github.io/ad-hoc/</id>
+    <published>2022-10-21T07:08:09.000Z</published>
+    <updated>2022-10-21T20:58:45.408Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Thomas Keller 开的美式家常菜餐馆。表面上谦卑地说“为食客充饥”，却在家庭一般轻松、和谐的用餐环境里用普通的食材展现了与众不同的烹饪水准。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Restaurant" scheme="https://frost-lee.github.io/tags/Restaurant/"/>
+    
+  </entry>
   
   <entry>
     <title>当它不再是一座博物馆</title>
@@ -396,27 +415,6 @@
     <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
     
     <category term="Statistics" scheme="https://frost-lee.github.io/tags/Statistics/"/>
-    
-    <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Predicting Human Age with the Length of Telomere</title>
-    <link href="https://frost-lee.github.io/length-telomere/"/>
-    <id>https://frost-lee.github.io/length-telomere/</id>
-    <published>2019-05-10T00:29:55.000Z</published>
-    <updated>2022-01-16T04:53:03.242Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;My friend Marcus Mao (I&#39;d call him &quot;Chairman Mao&quot;) is working on his research program on this topic, and I was honorably invited to do the data analysis part of his work. The data came from testing the length of telomere of cells from human hair. Obtaining the data can be tough and time consuming, but let&#39;s keep it simple and just focus on the data analysis itself.</summary>
-    
-    
-    
-    <category term="Data Analysis" scheme="https://frost-lee.github.io/categories/Data-Analysis/"/>
-    
-    
-    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
     
     <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
     
