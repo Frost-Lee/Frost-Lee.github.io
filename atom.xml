@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2022-10-21T22:03:02.426Z</updated>
+  <updated>2023-05-11T07:24:28.188Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>关于生死，连接，以及无尽的苔原</title>
+    <link href="https://frost-lee.github.io/death-stranding/"/>
+    <id>https://frost-lee.github.io/death-stranding/</id>
+    <published>2023-05-08T06:42:12.000Z</published>
+    <updated>2023-05-11T07:24:28.188Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;作为一部游戏，《死亡搁浅》并不以华丽的操作或者畅快的联机著称。它更像是一部经典的长篇小说，虽是看似平平淡淡的文字，却让人打开了再打开，看了一遍又一遍。</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+    <category term="Game" scheme="https://frost-lee.github.io/tags/Game/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ad hoc</title>
     <link href="https://frost-lee.github.io/ad-hoc/"/>
     <id>https://frost-lee.github.io/ad-hoc/</id>
     <published>2022-10-21T07:08:09.000Z</published>
-    <updated>2022-10-21T22:03:02.426Z</updated>
+    <updated>2022-10-22T08:59:58.013Z</updated>
     
     
     <summary type="html">&lt;p&gt;Thomas Keller 开的美式家常菜餐馆。表面上谦卑地说“为食客充饥”，却在家庭一般轻松、和谐的用餐环境里用普通的食材展现了与众不同的烹饪水准。</summary>
@@ -84,9 +103,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -185,11 +204,11 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -271,9 +290,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -299,7 +318,7 @@
     <link href="https://frost-lee.github.io/apple-new-york/"/>
     <id>https://frost-lee.github.io/apple-new-york/</id>
     <published>2019-09-21T20:51:37.000Z</published>
-    <updated>2022-01-29T23:08:19.516Z</updated>
+    <updated>2023-01-28T20:36:18.463Z</updated>
     
     
     <summary type="html">&lt;p&gt;和 Tim Cook 自拍，参与 Apple Fifth Avenue 的重新开业活动，购买 Apple Watch Series 5，在纽约街上躺着过夜，走过纽约的著名景点。24 小时中，发生了无数以前根本没有想过的疯狂的事情。</summary>
@@ -309,9 +328,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -330,9 +349,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -391,32 +410,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Implementing Box-Cox Transformation for Linear Model</title>
-    <link href="https://frost-lee.github.io/box-cox-linear-model/"/>
-    <id>https://frost-lee.github.io/box-cox-linear-model/</id>
-    <published>2019-05-12T16:38:46.000Z</published>
-    <updated>2022-01-16T04:53:03.242Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;The linear model is a simple but powerful statistics model for predicting. However, sometimes, the relationship between given features and labels is not linear, such as the diameter of a circle and the area of it. But this does not necessarily mean the linear model is not suitable for them. By applying certain transformations, the model can still be optimized for more realistic problems.</summary>
-    
-    
-    
-    <category term="Mathematics" scheme="https://frost-lee.github.io/categories/Mathematics/"/>
-    
-    
-    <category term="Python" scheme="https://frost-lee.github.io/tags/Python/"/>
-    
-    <category term="Statistics" scheme="https://frost-lee.github.io/tags/Statistics/"/>
-    
-    <category term="Regression Model" scheme="https://frost-lee.github.io/tags/Regression-Model/"/>
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
