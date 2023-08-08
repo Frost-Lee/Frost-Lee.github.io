@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2023-05-11T07:24:28.188Z</updated>
+  <updated>2023-08-08T23:27:58.911Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>体验一次暮光麻醉</title>
+    <link href="https://frost-lee.github.io/twilight-sedation/"/>
+    <id>https://frost-lee.github.io/twilight-sedation/</id>
+    <published>2023-08-08T22:09:47.000Z</published>
+    <updated>2023-08-08T23:27:58.911Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;没有很多话，简简单单地说说暮光麻醉的感觉。其实，也没有什么感觉。</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>关于生死，连接，以及无尽的苔原</title>
@@ -103,9 +120,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -204,11 +221,11 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -290,9 +307,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -328,9 +345,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -349,9 +366,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    
+    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
   </entry>
   
@@ -392,27 +409,6 @@
     <category term="Paper" scheme="https://frost-lee.github.io/tags/Paper/"/>
     
     <category term="Course Project" scheme="https://frost-lee.github.io/tags/Course-Project/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>30 小时的苏黎世</title>
-    <link href="https://frost-lee.github.io/30-hour-zurich/"/>
-    <id>https://frost-lee.github.io/30-hour-zurich/</id>
-    <published>2019-05-24T07:34:00.000Z</published>
-    <updated>2022-01-16T04:53:03.160Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;借在欧洲交换之便，在 2019 年 5 月的一个周末开始一场仅仅 30 小时的，说走就 5 天以后走的苏黎世之旅。</summary>
-    
-    
-    
-    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
-    
-    
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
