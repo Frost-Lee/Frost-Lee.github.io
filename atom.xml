@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2023-08-08T23:27:58.911Z</updated>
+  <updated>2023-09-13T07:39:50.713Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Tonchin</title>
+    <link href="https://frost-lee.github.io/tonchin/"/>
+    <id>https://frost-lee.github.io/tonchin/</id>
+    <published>2023-09-13T06:04:57.000Z</published>
+    <updated>2023-09-13T07:39:50.713Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;关于隐藏在曼哈顿中城闹市区之的一点意外之喜。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Restaurant" scheme="https://frost-lee.github.io/tags/Restaurant/"/>
+    
+  </entry>
   
   <entry>
     <title>体验一次暮光麻醉</title>
@@ -388,27 +407,6 @@
     
     
     <category term="Paradox" scheme="https://frost-lee.github.io/tags/Paradox/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Preprocessing Methods and Pipeline of Data Mining: An Overview</title>
-    <link href="https://frost-lee.github.io/preprocessing-pipeline-dm/"/>
-    <id>https://frost-lee.github.io/preprocessing-pipeline-dm/</id>
-    <published>2019-06-16T10:37:13.000Z</published>
-    <updated>2021-01-31T12:06:35.378Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;This is the course project of Seminar Data Mining (IN0014, IN4927) in Technical University of Munich. My topic described as &quot;Give a quick overview over the data mining pipeline and then focus on methods to preprocess data such that it can be successfully tackled by data mining methods.&quot;</summary>
-    
-    
-    
-    <category term="Data Analysis" scheme="https://frost-lee.github.io/categories/Data-Analysis/"/>
-    
-    
-    <category term="Paper" scheme="https://frost-lee.github.io/tags/Paper/"/>
-    
-    <category term="Course Project" scheme="https://frost-lee.github.io/tags/Course-Project/"/>
     
   </entry>
   
