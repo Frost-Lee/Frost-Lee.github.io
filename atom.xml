@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2023-09-13T07:39:50.713Z</updated>
+  <updated>2024-05-02T08:47:00.064Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>白日梦</title>
+    <link href="https://frost-lee.github.io/daydream/"/>
+    <id>https://frost-lee.github.io/daydream/</id>
+    <published>2024-05-02T08:42:00.000Z</published>
+    <updated>2024-05-02T08:47:00.064Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;我一直觉得自己不可能是个会跳伞的人：我不喜欢失重，不喜欢风险，有点恐高，之前几次坐过山车都头疼了将近一整天。然而生活是戏剧，人是戏剧里的小丑，从头到尾做着前后矛盾的事情，逗得自己发笑。</summary>
+    
+    
+    
+    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
+    
+    
+    <category term="My Story" scheme="https://frost-lee.github.io/tags/My-Story/"/>
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    
+  </entry>
   
   <entry>
     <title>Tonchin</title>
@@ -388,25 +409,6 @@
     <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何推翻“所有自然数都可以唯一地用不超过23个汉字表达”的反证法证明</title>
-    <link href="https://frost-lee.github.io/how-overthrow-23-lemma/"/>
-    <id>https://frost-lee.github.io/how-overthrow-23-lemma/</id>
-    <published>2019-07-01T17:32:02.000Z</published>
-    <updated>2020-07-16T16:31:07.387Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;“所有自然数都可以唯一地用不超过 23 个汉字表达” 当然是个伪命题，但是，在一个段子中，它居然被用反证法证实了。证实这个问题的反证法肯定有问题，然而段子里面的反证法听起来太过合理以至于找不出漏洞。最终，我曾经花了坐火车的晚上的时间找出了反证法的漏洞，现在把这些内容整理在这里吧。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
-    
-    
-    <category term="Paradox" scheme="https://frost-lee.github.io/tags/Paradox/"/>
     
   </entry>
   
