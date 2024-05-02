@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/prague-life/</loc>
+    <loc>https://frost-lee.github.io/note-steve-10/</loc>
     
     <lastmod>2022-01-16</lastmod>
     
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/note-steve-10/</loc>
+    <loc>https://frost-lee.github.io/prague-life/</loc>
     
     <lastmod>2022-01-16</lastmod>
     
@@ -242,13 +242,6 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/tags/USA/</loc>
-    <lastmod>2024-05-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://frost-lee.github.io/tags/Restaurant/</loc>
     <lastmod>2024-05-02</lastmod>
     <changefreq>daily</changefreq>
@@ -277,6 +270,13 @@
   </url>
   
   <url>
+    <loc>https://frost-lee.github.io/tags/USA/</loc>
+    <lastmod>2024-05-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://frost-lee.github.io/tags/Game/</loc>
     <lastmod>2024-05-02</lastmod>
     <changefreq>daily</changefreq>
@@ -285,13 +285,6 @@
   
   <url>
     <loc>https://frost-lee.github.io/tags/Book-Review/</loc>
-    <lastmod>2024-05-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://frost-lee.github.io/tags/Paradox/</loc>
     <lastmod>2024-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -313,6 +306,13 @@
   
   <url>
     <loc>https://frost-lee.github.io/tags/macOS/</loc>
+    <lastmod>2024-05-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://frost-lee.github.io/tags/Paradox/</loc>
     <lastmod>2024-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -405,14 +405,14 @@
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Data-Analysis/</loc>
+    <loc>https://frost-lee.github.io/categories/Developer-General/</loc>
     <lastmod>2024-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://frost-lee.github.io/categories/Developer-General/</loc>
+    <loc>https://frost-lee.github.io/categories/Data-Analysis/</loc>
     <lastmod>2024-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
