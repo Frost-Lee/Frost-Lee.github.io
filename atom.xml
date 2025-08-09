@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2024-05-02T08:53:57.044Z</updated>
+  <updated>2025-08-09T07:59:45.879Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jo</title>
+    <link href="https://frost-lee.github.io/jo/"/>
+    <id>https://frost-lee.github.io/jo/</id>
+    <published>2025-08-07T06:13:08.000Z</published>
+    <updated>2025-08-09T07:59:45.879Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;带父母一起去东京时造访的和牛餐厅。午市套餐被不同的和牛做法填满，精练且充满记忆点。</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Restaurant" scheme="https://frost-lee.github.io/tags/Restaurant/"/>
+    
+  </entry>
   
   <entry>
     <title>白日梦</title>
@@ -31,9 +50,9 @@
     <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
     
     
-    <category term="My Story" scheme="https://frost-lee.github.io/tags/My-Story/"/>
-    
     <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    
+    <category term="My Story" scheme="https://frost-lee.github.io/tags/My-Story/"/>
     
   </entry>
   
@@ -160,9 +179,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -261,11 +280,11 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -347,9 +366,9 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
-    
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
+    
+    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
   </entry>
   
@@ -385,28 +404,7 @@
     <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
     
     
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
     <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>布拉格的养老生活</title>
-    <link href="https://frost-lee.github.io/prague-life/"/>
-    <id>https://frost-lee.github.io/prague-life/</id>
-    <published>2019-08-28T01:47:37.000Z</published>
-    <updated>2022-01-16T04:53:03.242Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;旅行分两种，一种是马不停蹄打卡所有景点的硬核旅行，一种是每天睡懒觉好吃好喝的同时花一小部分时间随处走走逛逛的养老旅行。而我在布拉格的日子，应该算是后一种。</summary>
-    
-    
-    
-    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
-    
-    
-    <category term="Europe" scheme="https://frost-lee.github.io/tags/Europe/"/>
     
     <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
     
