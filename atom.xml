@@ -6,7 +6,7 @@
   <link href="https://frost-lee.github.io/atom.xml" rel="self"/>
   
   <link href="https://frost-lee.github.io/"/>
-  <updated>2025-08-09T07:59:45.879Z</updated>
+  <updated>2026-05-18T06:23:56.841Z</updated>
   <id>https://frost-lee.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>The French Laundry</title>
+    <link href="https://frost-lee.github.io/the-french-laundry/"/>
+    <id>https://frost-lee.github.io/the-french-laundry/</id>
+    <published>2026-05-18T01:15:20.000Z</published>
+    <updated>2026-05-18T06:23:56.841Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;传统且极致的法餐料理，创造定义本身。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
+    
+    
+    <category term="Restaurant" scheme="https://frost-lee.github.io/tags/Restaurant/"/>
+    
+  </entry>
   
   <entry>
     <title>Jo</title>
@@ -50,9 +69,9 @@
     <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
     
     
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
-    
     <category term="My Story" scheme="https://frost-lee.github.io/tags/My-Story/"/>
+    
+    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
@@ -386,27 +405,6 @@
     
     <category term="Free Thinking" scheme="https://frost-lee.github.io/categories/Free-Thinking/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>第五大道</title>
-    <link href="https://frost-lee.github.io/apple-new-york/"/>
-    <id>https://frost-lee.github.io/apple-new-york/</id>
-    <published>2019-09-21T20:51:37.000Z</published>
-    <updated>2023-01-28T20:36:18.463Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;和 Tim Cook 自拍，参与 Apple Fifth Avenue 的重新开业活动，购买 Apple Watch Series 5，在纽约街上躺着过夜，走过纽约的著名景点。24 小时中，发生了无数以前根本没有想过的疯狂的事情。</summary>
-    
-    
-    
-    <category term="Lifestyle" scheme="https://frost-lee.github.io/categories/Lifestyle/"/>
-    
-    
-    <category term="Travel" scheme="https://frost-lee.github.io/tags/Travel/"/>
-    
-    <category term="USA" scheme="https://frost-lee.github.io/tags/USA/"/>
     
   </entry>
   
